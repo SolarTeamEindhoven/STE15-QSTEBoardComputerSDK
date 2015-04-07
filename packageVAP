@@ -1,0 +1,57 @@
+#!/bin/sh
+
+if [ $# -lt 3 ]; then
+	echo "Usge: $0 <output file> <manifext file> <input files...>"
+	exit 1;
+fi
+
+OUTFILE=$1
+FILE=$2
+
+xmllint --schema /home/steven/STE/Highend/STE15-QSTEBoardComputer/MANIFESTSchema.xsd "$FILE" > /dev/null
+EXITSTATUS=$?
+
+if [ $EXITSTATUS -ne 0 ]; then
+	exit $EXITSTATUS
+fi
+
+REQUIRED_DL=`xmlstarlet sel --text -t -v '//manifest/App/pluginfiles/file/text()' "$FILE"`
+
+if [ "$REQUIRED_DL" != "" ]; then
+echo "$REQUIRED_DL" | while read line ; do
+    FOUNDIT=0
+
+    for i in ${@:3}
+    do
+        THISFILE=`basename "$i"`
+        if [ "$THISFILE" = "$line" ]; then
+            FOUNDIT=1
+            break
+        fi
+    done
+
+    if [ $FOUNDIT -eq 0 ]; then
+        echo "Missing file $line"
+        exit 1
+    fi
+done
+fi
+
+XMLOUTFILE="$OUTFILE.xml"
+echo "<!DOCTYPE RCC>" > $XMLOUTFILE
+echo "<RCC version=\"1.0\">" >> $XMLOUTFILE
+echo "<qresource>" >> $XMLOUTFILE
+echo "<file alias=\"MANIFEST.xml\">$FILE</file>" >> $XMLOUTFILE
+
+for i in ${@:3}
+do
+    FILEBASE=`basename "$i"`
+    echo "<file alias=\"$FILEBASE\">$i</file>" >> $XMLOUTFILE
+done
+
+echo "</qresource>" >> $XMLOUTFILE
+echo "</RCC>" >> $XMLOUTFILE
+
+rcc-qt5 -o "$OUTFILE" -binary "$XMLOUTFILE"
+
+rm "$XMLOUTFILE"

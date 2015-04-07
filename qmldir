@@ -1,0 +1,4 @@
+module nl.solarteameindhoven.sdk
+plugin STE15-QSTEBoardComputerSDK
+
+Launcher 1.0 Launcher.qml
