@@ -26,7 +26,17 @@ fi
 OUTFILE=$1
 FILE=$2
 
-xmllint --schema /home/steven/STE/Highend/STE15-QSTEBoardComputer/MANIFESTSchema.xsd "$FILE" > /dev/null
+THISPATH="$PWD/$0"
+while : ; do
+    DIR=$(dirname "$THISPATH")
+    NEWTHISPATH=$(readlink -f "$THISPATH")
+    [[ $? -eq 0 ]] || break
+    [[ "$NEWTHISPATH" != "$THISPATH" ]] || break
+    THISPATH="$NEWTHISPATH"
+done
+
+SCHEMAFILE="$DIR/MANIFESTSchema.xsd"
+xmllint --schema "$SCHEMAFILE" "$FILE" > /dev/null
 EXITSTATUS=$?
 
 if [ $EXITSTATUS -ne 0 ]; then

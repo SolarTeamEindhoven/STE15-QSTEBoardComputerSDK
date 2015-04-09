@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright 2015 Solar Team Eindhoven. All rights reserved.
+  
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+  
+    http://www.apache.org/licenses/LICENSE-2.0
+  
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<xs:schema elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:annotation>
+        <xs:documentation xml:lang="en">
+            Vehicle Application Package Manifest schema for solarteameindhoven.com.
+            Copyright 2015 solarteameindhoven.com. All rights reserved.
+        </xs:documentation>
+    </xs:annotation>
+
+    <xs:element name="manifest" type="manifest"/>
+
+    <xs:complexType name="manifest">
+        <xs:sequence>
+            <xs:element name="App" type="App" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="App">
+        <xs:sequence>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="description" type="xs:string"/>
+            <xs:element name="category" type="xs:string"/>
+            <xs:element name="pluginfiles" type="pluginfiles" minOccurs="0"/>
+            <xs:element name="entrypoint" type="entrypoint"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="file">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="uri" type="xs:string"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <xs:complexType name="pluginfiles">
+        <xs:sequence>
+            <xs:element name="file" type="file" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="entrypoint">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="type" type="entrypointtype"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <xs:simpleType name="entrypointtype">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="qml" />
+            <xs:enumeration value="class" />
+        </xs:restriction>
+    </xs:simpleType>
+
+</xs:schema>
