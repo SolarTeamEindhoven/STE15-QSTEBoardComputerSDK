@@ -19,12 +19,14 @@
 #ifndef BCCONTROLBAR_H
 #define BCCONTROLBAR_H
 
+#include "ste15-qsteboardcomputersdk_plugin.h"
+
 #include <QQuickItem>
 
 class ControlBarButton;
 class ControlBarScrollWheel;
 
-class BCControlBar : public QQuickItem
+class STE15QSTEBOARDCOMPUTERSDKSHARED_EXPORT BCControlBar : public QQuickItem
 {
     Q_OBJECT
     Q_DISABLE_COPY(BCControlBar)

@@ -21,7 +21,7 @@ TARGET = STE15-QSTEBoardComputerSDK
 QT += qml quick
 CONFIG += qt plugin c++11
 
-TARGET = $$qtLibraryTarget($$TARGET)
+#TARGET = $$qtLibraryTarget($$TARGET)
 uri = nl.solarteameindhoven.sdk
 
 # Input
@@ -57,13 +57,17 @@ HEADERS += \
 
 DISTFILES = qmldir
 
-LIBS += -lcanlib \
-        -L$$PWD/../STE15-QSTECANMessage/build/debug/ -lSTE15-QSTECANMessage \
-        -L$$PWD/../STE15-QKvaserInterface/build/debug/ -lSTE15-QKvaserInterface
+STE_BUILD_PATH_PREFIX = $$relative_path($$OUT_PWD)
+win32:CONFIG(release, debug|release): STE_BUILD_PATH_PREFIX = $$STE_BUILD_PATH_PREFIX/release
+else:win32:CONFIG(debug, debug|release): STE_BUILD_PATH_PREFIX = $$STE_BUILD_PATH_PREFIX/debug/
+
+LIBS += \
+        -L$$PWD/../STE15-QSTECANMessage/$$STE_BUILD_PATH_PREFIX -lSTE15-QSTECANMessage
 
 INCLUDEPATH += \
-        $$PWD/../STE15-QSTECANMessage/include \
-        $$PWD/../STE15-QKvaserInterface
+        $$PWD/../STE15-QSTECANMessage/include
+
+DEFINES += STE15QSTEBOARDCOMPUTERSDK_LIBRARY
 
 !equals(_PRO_FILE_PWD_, $$OUT_PWD) {
     copy_qmldir.target = $$OUT_PWD/qmldir

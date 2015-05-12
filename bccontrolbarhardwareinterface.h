@@ -19,6 +19,8 @@
 #ifndef BCCONTROLBARHARDWAREINTERFACE_H
 #define BCCONTROLBARHARDWAREINTERFACE_H
 
+#include "ste15-qsteboardcomputersdk_plugin.h"
+
 #include <functional>
 
 #include <QQuickItem>
@@ -26,7 +28,7 @@
 
 class QQuickWindow;
 
-class BCControlBarHardwareInterface : public QQuickItem
+class STE15QSTEBOARDCOMPUTERSDKSHARED_EXPORT BCControlBarHardwareInterface : public QQuickItem
 {
     Q_OBJECT
     Q_DISABLE_COPY(BCControlBarHardwareInterface)

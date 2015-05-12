@@ -19,11 +19,13 @@
 #ifndef VEHICLELAUNCHER_H
 #define VEHICLELAUNCHER_H
 
+#include "ste15-qsteboardcomputersdk_plugin.h"
+
 #include <QQuickItem>
 
 class VehicleApp;
 
-class VehicleLauncher : public QQuickItem
+class STE15QSTEBOARDCOMPUTERSDKSHARED_EXPORT VehicleLauncher : public QQuickItem
 {
     Q_OBJECT
     Q_DISABLE_COPY(VehicleLauncher)

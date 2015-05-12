@@ -19,12 +19,14 @@
 #ifndef CARSENSOR_H
 #define CARSENSOR_H
 
+#include "ste15-qsteboardcomputersdk_plugin.h"
+
 #include <QQuickItem>
 #include <SensorIDs.h>
 
 class QCANMessage;
 
-class CARSensor : public QQuickItem
+class STE15QSTEBOARDCOMPUTERSDKSHARED_EXPORT CARSensor : public QQuickItem
 {
     Q_OBJECT
     Q_DISABLE_COPY(CARSensor)

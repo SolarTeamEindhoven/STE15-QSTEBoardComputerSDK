@@ -21,7 +21,15 @@
 
 #include <QQmlExtensionPlugin>
 
-class STE15_QSTEBoardComputerSDKPlugin : public QQmlExtensionPlugin
+#include <QtCore/qglobal.h>
+
+#if defined(STE15QSTEBOARDCOMPUTERSDK_LIBRARY)
+#  define STE15QSTEBOARDCOMPUTERSDKSHARED_EXPORT Q_DECL_EXPORT
+#else
+#  define STE15QSTEBOARDCOMPUTERSDKSHARED_EXPORT Q_DECL_IMPORT
+#endif
+
+class STE15QSTEBOARDCOMPUTERSDKSHARED_EXPORT STE15_QSTEBoardComputerSDKPlugin : public QQmlExtensionPlugin
 {
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "org.qt-project.Qt.QQmlExtensionInterface")

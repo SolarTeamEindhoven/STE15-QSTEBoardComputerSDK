@@ -19,13 +19,15 @@
 #ifndef VEHICLEAPPCONTAINER_H
 #define VEHICLEAPPCONTAINER_H
 
+#include "ste15-qsteboardcomputersdk_plugin.h"
+
 #include <QQuickItem>
 
 #include <BCControlBarHardwareInterface>
 
 class VehicleApp;
 
-class VehicleAppContainer : public QQuickItem
+class STE15QSTEBOARDCOMPUTERSDKSHARED_EXPORT VehicleAppContainer : public QQuickItem
 {
     Q_OBJECT
 

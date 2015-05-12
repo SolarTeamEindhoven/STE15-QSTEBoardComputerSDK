@@ -19,9 +19,11 @@
 #ifndef CONTROLBARBUTTON_H
 #define CONTROLBARBUTTON_H
 
+#include "ste15-qsteboardcomputersdk_plugin.h"
+
 #include <QQuickItem>
 
-class ControlBarButton : public QQuickItem
+class STE15QSTEBOARDCOMPUTERSDKSHARED_EXPORT ControlBarButton : public QQuickItem
 {
     Q_OBJECT
     Q_DISABLE_COPY(ControlBarButton)
