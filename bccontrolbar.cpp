@@ -18,6 +18,9 @@
 
 #include "bccontrolbar.h"
 
+#include <cmath>
+#include <limits>
+
 #include <QVariant>
 #include <QQuickWindow>
 #include <QScreen>
@@ -36,6 +39,7 @@ BCControlBar::BCControlBar(QQuickItem *parent)
     , rightScrollWheel(NULL)
 {
     connect(this, &QQuickItem::windowChanged, this, &BCControlBar::handleWindowChanged);
+    connect(this, &QQuickItem::parentChanged, this, &BCControlBar::handleParentChanged);
 }
 
 BCControlBar::~BCControlBar()
@@ -76,7 +80,7 @@ void BCControlBar::setLeftButton(ControlBarButton* newLeftButton)
     anchors->setProperty("verticalCenter", this->property("top"));
     anchors->setProperty("horizontalCenter", this->property("left"));
 
-    updateButtonDpiProperties(newLeftButton, LeftButtonLocationX_mm);
+    updateLeftButtonProperties(getDpmm());
 
     leftButton = newLeftButton;
     emit leftButtonChanged(newLeftButton);
@@ -90,7 +94,7 @@ void BCControlBar::setMiddleButton(ControlBarButton* newMiddleButton)
     anchors->setProperty("verticalCenter", this->property("top"));
     anchors->setProperty("horizontalCenter", this->property("left"));
 
-    updateButtonDpiProperties(newMiddleButton, LeftButtonLocationX_mm);
+    updateMiddleButtonProperties(getDpmm());
 
     middleButton = newMiddleButton;
     emit middleButtonChanged(newMiddleButton);
@@ -104,7 +108,7 @@ void BCControlBar::setRightButton(ControlBarButton* newRightButton)
     anchors->setProperty("verticalCenter", this->property("top"));
     anchors->setProperty("horizontalCenter", this->property("left"));
 
-    updateButtonDpiProperties(newRightButton, LeftButtonLocationX_mm);
+    updateRightButtonProperties(getDpmm());
 
     rightButton = newRightButton;
     emit rightButtonChanged(newRightButton);
@@ -118,7 +122,7 @@ void BCControlBar::setLeftScrollWheel(ControlBarScrollWheel* newLeftScrollWheel)
     anchors->setProperty("verticalCenter", this->property("top"));
     anchors->setProperty("horizontalCenter", this->property("left"));
 
-    updateScrollWheelDpiProperties(newLeftScrollWheel, LeftScrollWheelLocationX_mm);
+    updateLeftScrollWheelProperties(getDpmm());
 
     leftScrollWheel = newLeftScrollWheel;
     emit leftScrollWheelChanged(newLeftScrollWheel);
@@ -132,7 +136,7 @@ void BCControlBar::setRightScrollWheel(ControlBarScrollWheel* newRightScrollWhee
     anchors->setProperty("verticalCenter", this->property("top"));
     anchors->setProperty("horizontalCenter", this->property("left"));
 
-    updateScrollWheelDpiProperties(newRightScrollWheel, RightScrollWheelLocationX_mm);
+    updateRightScrollWheelProperties(getDpmm());
 
     rightScrollWheel = newRightScrollWheel;
     emit rightScrollWheelChanged(newRightScrollWheel);
@@ -140,12 +144,70 @@ void BCControlBar::setRightScrollWheel(ControlBarScrollWheel* newRightScrollWhee
 
 void BCControlBar::handleWindowChanged(QQuickWindow*)
 {
-    updateButtonDpiProperties(leftButton, LeftButtonLocationX_mm);
-    updateButtonDpiProperties(middleButton, MiddleButtonLocationX_mm);
-    updateButtonDpiProperties(rightButton, RightButtonLocationX_mm);
+    updateDpiProperties();
+}
 
-    updateScrollWheelDpiProperties(leftScrollWheel, LeftScrollWheelLocationX_mm);
-    updateScrollWheelDpiProperties(rightScrollWheel, RightScrollWheelLocationX_mm);
+void BCControlBar::handleParentChanged(QQuickItem* newParent)
+{
+    disconnect(parentItem(), &QQuickItem::widthChanged, this, &BCControlBar::updateWidth);
+    connect(newParent, &QQuickItem::widthChanged, this, &BCControlBar::updateWidth);
+
+    updateWidth();
+}
+
+void BCControlBar::updateWidth()
+{
+    setWidth(parentItem()->width());
+    updateDpiProperties();
+}
+
+double BCControlBar::getDpmm()
+{
+    QQuickWindow* window = this->window();
+
+    if(window == NULL)
+        return std::numeric_limits<double>::quiet_NaN();
+
+    return window->screen()->physicalDotsPerInchY() / inch2mmh;
+}
+
+void BCControlBar::updateLeftButtonProperties(double dpmm)
+{
+    updateButtonDpiProperties(leftButton,   width() * 1 / 6, dpmm);
+}
+
+void BCControlBar::updateMiddleButtonProperties(double dpmm)
+{
+    updateButtonDpiProperties(middleButton, width() * 3 / 6, dpmm);
+}
+
+void BCControlBar::updateRightButtonProperties(double dpmm)
+{
+    updateButtonDpiProperties(rightButton,  width() * 5 / 6, dpmm);
+}
+
+void BCControlBar::updateLeftScrollWheelProperties(double dpmm)
+{
+    updateScrollWheelDpiProperties(leftScrollWheel, LeftScrollWheelLocationX_mm * dpmm, dpmm);
+}
+
+void BCControlBar::updateRightScrollWheelProperties(double dpmm)
+{
+    updateScrollWheelDpiProperties(rightScrollWheel, RightScrollWheelLocationX_mm * dpmm, dpmm);
+}
+
+void BCControlBar::updateDpiProperties()
+{
+    double dpmm = getDpmm();
+
+    if(std::isnan(dpmm))
+        return;
+
+    updateLeftButtonProperties(dpmm);
+    updateMiddleButtonProperties(dpmm);
+    updateRightButtonProperties(dpmm);
+    updateLeftScrollWheelProperties(dpmm);
+    updateRightScrollWheelProperties(dpmm);
 }
 
 void BCControlBar::setParentToThis(QQuickItem* item)
@@ -154,39 +216,25 @@ void BCControlBar::setParentToThis(QQuickItem* item)
     item->setProperty("parent", link);
 }
 
-void BCControlBar::updateButtonDpiProperties(ControlBarButton* button, double location)
+void BCControlBar::updateButtonDpiProperties(ControlBarButton* button, double location, double dpmm)
 {
     if(button == NULL)
         return;
 
     QObject* anchors = button->property("anchors").value<QObject*>();
-    updateDPIProperty(anchors, "horizontalCenterOffset", location);
-    updateDPIProperty(button, "width", ButtonRadius_mm);
-    updateDPIProperty(button, "height", ButtonRadius_mm);
+    anchors->setProperty("horizontalCenterOffset", location);
+    button->setProperty("width", ButtonRadius_mm * dpmm);
+    button->setProperty("height", ButtonRadius_mm * dpmm);
 }
 
-void BCControlBar::updateScrollWheelDpiProperties(ControlBarScrollWheel* scrollWheel, double location)
+void BCControlBar::updateScrollWheelDpiProperties(ControlBarScrollWheel* scrollWheel, double location, double dpmm)
 {
     if(scrollWheel == NULL)
         return;
 
     QObject* anchors = scrollWheel->property("anchors").value<QObject*>();
-    updateDPIProperty(anchors, "horizontalCenterOffset", location);
-    updateDPIProperty(anchors, "verticalCenterOffset", ScrollWheelLocationY_mm);
-    updateDPIProperty(scrollWheel, "width", ScrollWheelRadius_mm);
-    updateDPIProperty(scrollWheel, "height", ScrollWheelRadius_mm);
+    anchors->setProperty("horizontalCenterOffset", location);
+    anchors->setProperty("verticalCenterOffset", ScrollWheelLocationY_mm * dpmm);
+    scrollWheel->setProperty("width", ScrollWheelRadius_mm * dpmm);
+    scrollWheel->setProperty("height", ScrollWheelRadius_mm * dpmm);
 }
-
-void BCControlBar::updateDPIProperty(QObject* obj, const char* name, double value)
-{
-    if(obj == NULL)
-        return;
-
-    QQuickWindow* window = this->window();
-    if(window == NULL)
-        return;
-
-    double dpmm = window->screen()->physicalDotsPerInchY() / inch2mmh; // Dots Per MiliMeter
-    obj->setProperty(name, value * dpmm);
-}
-

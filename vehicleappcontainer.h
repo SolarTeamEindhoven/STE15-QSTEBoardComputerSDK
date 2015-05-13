@@ -56,6 +56,7 @@ public slots:
 
 private slots:
     void bccontrolBarPositionChanged(double position);
+    void updateControlBarWidth();
 
 private:
     VehicleApp* app;

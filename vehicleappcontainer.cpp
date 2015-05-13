@@ -118,8 +118,7 @@ void VehicleAppContainer::disconnectAppToBCControlBar(VehicleApp* app)
     if(bccontrolBarHardwareInterface == NULL)
         return;
 
-    qDebug() << "Should disconnect stuff now...";
-    // TODO: Actual disconnect...
+    disconnect(this, &QQuickItem::widthChanged, this, &VehicleAppContainer::updateControlBarWidth);
 }
 
 void VehicleAppContainer::connectAppToBCControlBar(VehicleApp* app)
@@ -133,8 +132,16 @@ void VehicleAppContainer::connectAppToBCControlBar(VehicleApp* app)
     if(bccontrolBarHardwareInterface == NULL)
         return;
 
+    connect(this, &QQuickItem::widthChanged, this, &VehicleAppContainer::updateControlBarWidth);
+    bccontrolBarHardwareInterface->setWidth(width());
+
     QVariant link = QVariant::fromValue<BCControlBarHardwareInterface*>(bccontrolBarHardwareInterface);
     app->getBCControlBar()->setProperty("parent", link);
     app->getBCControlBar()->property("anchors").value<QObject*>()->setProperty("fill", link);
+}
+
+void VehicleAppContainer::updateControlBarWidth()
+{
+    bccontrolBarHardwareInterface->setWidth(width());
 }
 

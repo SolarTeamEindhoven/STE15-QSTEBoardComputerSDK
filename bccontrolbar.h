@@ -42,9 +42,9 @@ class STE15QSTEBOARDCOMPUTERSDKSHARED_EXPORT BCControlBar : public QQuickItem
 
 public:
     static constexpr double ButtonRadius_mm = 20;
-    static constexpr double LeftButtonLocationX_mm = 30;
-    static constexpr double MiddleButtonLocationX_mm = 70;
-    static constexpr double RightButtonLocationX_mm = 110;
+    //static constexpr double LeftButtonLocationX_mm = 30;
+    //static constexpr double MiddleButtonLocationX_mm = 70;
+    //static constexpr double RightButtonLocationX_mm = 110;
 
     static constexpr double ScrollWheelRadius_mm = 35;
     static constexpr double ScrollWheelLocationY_mm = -20;
@@ -80,6 +80,8 @@ public slots:
 
 private slots:
     void handleWindowChanged(QQuickWindow*);
+    void handleParentChanged(QQuickItem*);
+    void updateWidth();
 
 private:
     ControlBarButton* leftButton;
@@ -91,10 +93,17 @@ private:
 
     void setParentToThis(QQuickItem* item);
 
-    void updateButtonDpiProperties(ControlBarButton* button, double location);
-    void updateScrollWheelDpiProperties(ControlBarScrollWheel* scrollWheel, double location);
+    double getDpmm();
 
-    void updateDPIProperty(QObject* obj, const char* name, double value);
+    void updateLeftButtonProperties(double dpmm);
+    void updateMiddleButtonProperties(double dpmm);
+    void updateRightButtonProperties(double dpmm);
+    void updateLeftScrollWheelProperties(double dpmm);
+    void updateRightScrollWheelProperties(double dpmm);
+
+    void updateDpiProperties();
+    void updateButtonDpiProperties(ControlBarButton* button, double location, double dpmm);
+    void updateScrollWheelDpiProperties(ControlBarScrollWheel* scrollWheel, double location, double dpmm);
 };
 
 #endif // BCCONTROLBAR_H
