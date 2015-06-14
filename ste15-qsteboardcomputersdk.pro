@@ -38,21 +38,21 @@ SOURCES += \
     carsensor.cpp
 
 HEADERS += \
-    ste15-qsteboardcomputersdk_plugin.h \
-    vehicleapp.h \
-    VehicleApp \
-    bccontrolbar.h \
-    BCControlBar \
-    controlbarbutton.h \
-    ControlBarButton \
-    controlbarscrollwheel.h \
-    ControlBarScrollWheel \
-    vehiclelauncher.h \
-    VehicleLauncher \
-    vehicleappcontainer.h \
-    bccontrolbarhardwareinterface.h \
-    carsensor.h \
-    CARSensor
+    include/ste15-qsteboardcomputersdk_plugin.h \
+    include/vehicleapp.h \
+    include/VehicleApp \
+    include/bccontrolbar.h \
+    include/BCControlBar \
+    include/controlbarbutton.h \
+    include/ControlBarButton \
+    include/controlbarscrollwheel.h \
+    include/ControlBarScrollWheel \
+    include/vehiclelauncher.h \
+    include/VehicleLauncher \
+    include/vehicleappcontainer.h \
+    include/bccontrolbarhardwareinterface.h \
+    include/carsensor.h \
+    include/CARSensor
 
 DISTFILES = qmldir
 
@@ -63,7 +63,7 @@ else:win32:CONFIG(debug, debug|release): STE_BUILD_PATH_PREFIX = $$STE_BUILD_PAT
 LIBS += \
         -L$$PWD/../STE15-QSTECANMessage/$$STE_BUILD_PATH_PREFIX -lSTE15-QSTECANMessage
 
-INCLUDEPATH += \
+INCLUDEPATH += include \
         $$PWD/../STE15-QSTECANMessage/include
 
 DEFINES += STE15QSTEBOARDCOMPUTERSDK_LIBRARY
@@ -77,10 +77,13 @@ DEFINES += STE15QSTEBOARDCOMPUTERSDK_LIBRARY
 }
 
 qmldir.files = qmldir
+header_files.files = include/*
+
 unix {
     installPath = $$[QT_INSTALL_QML]/$$replace(uri, \\., /)
     qmldir.path = $$installPath
     target.path = /usr/lib
-    INSTALLS += target qmldir
+    header_files.path = /usr/include
+    INSTALLS += target qmldir header_files
 }
 
