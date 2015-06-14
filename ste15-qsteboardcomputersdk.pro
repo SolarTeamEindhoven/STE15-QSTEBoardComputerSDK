@@ -16,10 +16,11 @@
 ##
 ###########################################################################
 
-TEMPLATE = lib
 TARGET = STE15-QSTEBoardComputerSDK
+TEMPLATE = lib
 QT += qml quick
-CONFIG += qt plugin c++11
+CONFIG += qt c++11
+#CONFIG += plugin
 
 #TARGET = $$qtLibraryTarget($$TARGET)
 uri = nl.solarteameindhoven.sdk
@@ -33,9 +34,7 @@ SOURCES += \
     controlbarscrollwheel.cpp \
     vehiclelauncher.cpp \
     vehicleappcontainer.cpp \
-    VehicleAppContainer \
     bccontrolbarhardwareinterface.cpp \
-    BCControlBarHardwareInterface \
     carsensor.cpp
 
 HEADERS += \
@@ -81,7 +80,7 @@ qmldir.files = qmldir
 unix {
     installPath = $$[QT_INSTALL_QML]/$$replace(uri, \\., /)
     qmldir.path = $$installPath
-    target.path = $$installPath
+    target.path = /usr/lib
     INSTALLS += target qmldir
 }
 
