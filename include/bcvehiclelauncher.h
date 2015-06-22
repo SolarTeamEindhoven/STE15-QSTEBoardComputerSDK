@@ -19,40 +19,40 @@
 #ifndef VEHICLELAUNCHER_H
 #define VEHICLELAUNCHER_H
 
-#include "ste15-qsteboardcomputersdk_plugin.h"
+#include <bcsdkcommon.h>
 
 #include <QQuickItem>
 
-class VehicleApp;
+class BCVehicleApp;
 
-class STE15QSTEBOARDCOMPUTERSDKSHARED_EXPORT VehicleLauncher : public QQuickItem
+class STE15QSTEBOARDCOMPUTERSDKSHARED_EXPORT BCVehicleLauncher : public QQuickItem
 {
     Q_OBJECT
-    Q_DISABLE_COPY(VehicleLauncher)
+    Q_DISABLE_COPY(BCVehicleLauncher)
 
-    Q_PROPERTY(QQmlListProperty<VehicleApp> apps READ getApps NOTIFY appsChanged)
+    Q_PROPERTY(QQmlListProperty<BCVehicleApp> apps READ getApps NOTIFY appsChanged)
 
 public:
-    explicit VehicleLauncher(QQuickItem* parent = NULL);
-    ~VehicleLauncher();
+    explicit BCVehicleLauncher(QQuickItem* parent = NULL);
+    ~BCVehicleLauncher();
 
-    const QList<VehicleApp*>& getAppList() const;
-    Q_INVOKABLE void addApp(VehicleApp* app);
-    Q_INVOKABLE void removeApp(VehicleApp* app);
+    const QList<BCVehicleApp*>& getAppList() const;
+    Q_INVOKABLE void addApp(BCVehicleApp* app);
+    Q_INVOKABLE void removeApp(BCVehicleApp* app);
 
 signals:
     void appsChanged();
-    void appAdded(VehicleApp*);
-    void appRemoved(VehicleApp*);
+    void appAdded(BCVehicleApp*);
+    void appRemoved(BCVehicleApp*);
 
 public slots:
 
 private:
-    QList<VehicleApp*> apps;
+    QList<BCVehicleApp*> apps;
 
-    QQmlListProperty<VehicleApp> getApps();
-    static int CountFunction(QQmlListProperty<VehicleApp>* list);
-    static VehicleApp* AtFunction(QQmlListProperty<VehicleApp>* list, int index);
+    QQmlListProperty<BCVehicleApp> getApps();
+    static int CountFunction(QQmlListProperty<BCVehicleApp>* list);
+    static BCVehicleApp* AtFunction(QQmlListProperty<BCVehicleApp>* list, int index);
 };
 
 #endif // VEHICLELAUNCHER_H

@@ -25,8 +25,8 @@
 #include <QQuickWindow>
 #include <QScreen>
 
-#include <ControlBarButton>
-#include <ControlBarScrollWheel>
+#include <BCControlBarButton>
+#include <BCControlBarScrollWheel>
 
 static constexpr double inch2mmh = 25.4;
 
@@ -47,32 +47,32 @@ BCControlBar::~BCControlBar()
     ;
 }
 
-ControlBarButton* BCControlBar::getLeftButton()
+BCControlBarButton* BCControlBar::getLeftButton()
 {
     return leftButton;
 }
 
-ControlBarButton* BCControlBar::getMiddleButton()
+BCControlBarButton* BCControlBar::getMiddleButton()
 {
     return middleButton;
 }
 
-ControlBarButton* BCControlBar::getRightButton()
+BCControlBarButton* BCControlBar::getRightButton()
 {
     return rightButton;
 }
 
-ControlBarScrollWheel* BCControlBar::getLeftScrollWheel()
+BCControlBarScrollWheel* BCControlBar::getLeftScrollWheel()
 {
     return leftScrollWheel;
 }
 
-ControlBarScrollWheel* BCControlBar::getRightScrollWheel()
+BCControlBarScrollWheel* BCControlBar::getRightScrollWheel()
 {
     return rightScrollWheel;
 }
 
-void BCControlBar::setLeftButton(ControlBarButton* newLeftButton)
+void BCControlBar::setLeftButton(BCControlBarButton* newLeftButton)
 {
     setParentToThis(newLeftButton);
 
@@ -86,7 +86,7 @@ void BCControlBar::setLeftButton(ControlBarButton* newLeftButton)
     emit leftButtonChanged(newLeftButton);
 }
 
-void BCControlBar::setMiddleButton(ControlBarButton* newMiddleButton)
+void BCControlBar::setMiddleButton(BCControlBarButton* newMiddleButton)
 {
     setParentToThis(newMiddleButton);
 
@@ -100,7 +100,7 @@ void BCControlBar::setMiddleButton(ControlBarButton* newMiddleButton)
     emit middleButtonChanged(newMiddleButton);
 }
 
-void BCControlBar::setRightButton(ControlBarButton* newRightButton)
+void BCControlBar::setRightButton(BCControlBarButton* newRightButton)
 {
     setParentToThis(newRightButton);
 
@@ -114,7 +114,7 @@ void BCControlBar::setRightButton(ControlBarButton* newRightButton)
     emit rightButtonChanged(newRightButton);
 }
 
-void BCControlBar::setLeftScrollWheel(ControlBarScrollWheel* newLeftScrollWheel)
+void BCControlBar::setLeftScrollWheel(BCControlBarScrollWheel* newLeftScrollWheel)
 {
     setParentToThis(newLeftScrollWheel);
 
@@ -128,7 +128,7 @@ void BCControlBar::setLeftScrollWheel(ControlBarScrollWheel* newLeftScrollWheel)
     emit leftScrollWheelChanged(newLeftScrollWheel);
 }
 
-void BCControlBar::setRightScrollWheel(ControlBarScrollWheel* newRightScrollWheel)
+void BCControlBar::setRightScrollWheel(BCControlBarScrollWheel* newRightScrollWheel)
 {
     setParentToThis(newRightScrollWheel);
 
@@ -216,7 +216,7 @@ void BCControlBar::setParentToThis(QQuickItem* item)
     item->setProperty("parent", link);
 }
 
-void BCControlBar::updateButtonDpiProperties(ControlBarButton* button, double location, double dpmm)
+void BCControlBar::updateButtonDpiProperties(BCControlBarButton* button, double location, double dpmm)
 {
     if(button == NULL)
         return;
@@ -227,7 +227,7 @@ void BCControlBar::updateButtonDpiProperties(ControlBarButton* button, double lo
     button->setProperty("height", ButtonRadius_mm * dpmm);
 }
 
-void BCControlBar::updateScrollWheelDpiProperties(ControlBarScrollWheel* scrollWheel, double location, double dpmm)
+void BCControlBar::updateScrollWheelDpiProperties(BCControlBarScrollWheel* scrollWheel, double location, double dpmm)
 {
     if(scrollWheel == NULL)
         return;

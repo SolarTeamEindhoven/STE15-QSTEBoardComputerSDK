@@ -21,28 +21,60 @@
 #include <qglobal.h>
 #include <qqml.h>
 
-#include <ControlBarButton>
-#include <ControlBarScrollWheel>
+#include <BCControlBarButton>
+#include <BCControlBarScrollWheel>
 #include <BCControlBar>
-#include <VehicleApp>
-#include <VehicleLauncher>
+#include <BCVehicleApp>
+#include <BCVehicleLauncher>
 #include <BCControlBarHardwareInterface>
-#include <VehicleAppContainer>
-#include <CARSensor>
+#include <BCVehicleAppContainer>
+#include <BCCARSensor>
 
-#define REGISTER(TYPE) qmlRegisterType<TYPE>(uri, version_major, version_minor, QT_STRINGIFY(TYPE))
+static constexpr char uri[] = "nl.solarteameindhoven.sdk";
+static constexpr int version_major = 1;
+static constexpr int version_minor = 0;
+//#define REGISTER(TYPE) qmlRegisterType<TYPE>(uri, version_major, version_minor, QT_STRINGIFY(TYPE))
+#define REGISTER(TYPE) qmlRegisterType<TYPE>("nl.solarteameindhoven.sdk", version_major, version_minor, QT_STRINGIFY(TYPE))
 
+//*
 void STE15_QSTEBoardComputerSDKPlugin::registerTypes(const char *uri)
 {
     // @uri nl.solarteameindhoven.sdk
-    REGISTER(ControlBarButton);
-    REGISTER(ControlBarScrollWheel);
+    REGISTER(BCControlBarButton);
+    REGISTER(BCControlBarScrollWheel);
     REGISTER(BCControlBar);
-    REGISTER(VehicleApp);
-    REGISTER(VehicleLauncher);
+    REGISTER(BCVehicleApp);
+    REGISTER(BCVehicleLauncher);
     REGISTER(BCControlBarHardwareInterface);
-    REGISTER(VehicleAppContainer);
-    REGISTER(CARSensor);
+    REGISTER(BCVehicleAppContainer);
+    REGISTER(BCCARSensor);
+}
+//*/
+
+void STE15QSTEBOARDCOMPUTERSDKSHARED_EXPORT registerBCSDKQMLTypes()
+{
+    qDebug() << "Hoi 1";
+
+    // @uri nl.solarteameindhoven.sdk
+    REGISTER(BCCARSensor);
+    REGISTER(BCControlBarButton);
+    REGISTER(BCControlBarHardwareInterface);
+    REGISTER(BCControlBarScrollWheel);
+    REGISTER(BCControlBar);
+    REGISTER(BCVehicleApp);
+    REGISTER(BCVehicleLauncher);
+    REGISTER(BCVehicleAppContainer);
+
+    qWarning() << "Hoi 2";
 }
 
-
+/*
+struct STE15QSTEBOARDCOMPUTERSDKSHARED_EXPORT registerQMLTypes_s
+{
+    registerQMLTypes_s()
+    {
+        registerBCSDKQMLTypes();
+    }
+};
+static STE15QSTEBOARDCOMPUTERSDKSHARED_EXPORT registerQMLTypes_s registerQMLTypes;
+//*/

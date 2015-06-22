@@ -16,12 +16,12 @@
  **
  **************************************************************************/
 
-#include "vehicleappcontainer.h"
+#include "bcvehicleappcontainer.h"
 
 #include "bccontrolbar.h"
-#include "vehicleapp.h"
+#include "bcvehicleapp.h"
 
-VehicleAppContainer::VehicleAppContainer(QQuickItem *parent)
+BCVehicleAppContainer::BCVehicleAppContainer(QQuickItem *parent)
     : QQuickItem(parent)
     , app(NULL)
     , bccontrolBarHardwareInterface(NULL)
@@ -30,33 +30,33 @@ VehicleAppContainer::VehicleAppContainer(QQuickItem *parent)
     ;
 }
 
-VehicleAppContainer::~VehicleAppContainer()
+BCVehicleAppContainer::~BCVehicleAppContainer()
 {
     ;
 }
 
-VehicleApp* VehicleAppContainer::getApp()
+BCVehicleApp* BCVehicleAppContainer::getApp()
 {
     return app;
 }
 
-BCControlBarHardwareInterface* VehicleAppContainer::getBCControlBarHardwareInterface()
+BCControlBarHardwareInterface* BCVehicleAppContainer::getBCControlBarHardwareInterface()
 {
     return bccontrolBarHardwareInterface;
 }
 
-double VehicleAppContainer::getBCControlBarOpacity() const
+double BCVehicleAppContainer::getBCControlBarOpacity() const
 {
     return bccontrolBarOpacity;
 }
 
-void VehicleAppContainer::setApp(VehicleApp* newApp)
+void BCVehicleAppContainer::setApp(BCVehicleApp* newApp)
 {
     disconnectAppToBCControlBar(app);
 
     app = newApp;
 
-    QVariant linkToThis = QVariant::fromValue<VehicleAppContainer*>(this);
+    QVariant linkToThis = QVariant::fromValue<BCVehicleAppContainer*>(this);
     app->setProperty("parent", linkToThis);
     app->property("anchors").value<QObject*>()->setProperty("fill", linkToThis);
 
@@ -65,12 +65,12 @@ void VehicleAppContainer::setApp(VehicleApp* newApp)
     emit appChanged(newApp);
 }
 
-void VehicleAppContainer::setBCControlBarHardwareInterface(BCControlBarHardwareInterface* newBCControlBarHardwareInterface)
+void BCVehicleAppContainer::setBCControlBarHardwareInterface(BCControlBarHardwareInterface* newBCControlBarHardwareInterface)
 {
     if(bccontrolBarHardwareInterface)
-        disconnect(bccontrolBarHardwareInterface, &BCControlBarHardwareInterface::positionChanged, this, &VehicleAppContainer::bccontrolBarPositionChanged);
+        disconnect(bccontrolBarHardwareInterface, &BCControlBarHardwareInterface::positionChanged, this, &BCVehicleAppContainer::bccontrolBarPositionChanged);
 
-    connect(newBCControlBarHardwareInterface, &BCControlBarHardwareInterface::positionChanged, this, &VehicleAppContainer::bccontrolBarPositionChanged);
+    connect(newBCControlBarHardwareInterface, &BCControlBarHardwareInterface::positionChanged, this, &BCVehicleAppContainer::bccontrolBarPositionChanged);
 
     disconnectAppToBCControlBar(app);
     bccontrolBarHardwareInterface = newBCControlBarHardwareInterface;
@@ -78,13 +78,13 @@ void VehicleAppContainer::setBCControlBarHardwareInterface(BCControlBarHardwareI
     emit bccontrolBarHardwareInterfaceChanged(newBCControlBarHardwareInterface);
 }
 
-void VehicleAppContainer::setBCControlBarOpacity(double newBCControlBarOpacity)
+void BCVehicleAppContainer::setBCControlBarOpacity(double newBCControlBarOpacity)
 {
     bccontrolBarOpacity = newBCControlBarOpacity;
     emit bccontrolBarOpacityChanged(newBCControlBarOpacity);
 }
 
-void VehicleAppContainer::bccontrolBarPositionChanged(double position)
+void BCVehicleAppContainer::bccontrolBarPositionChanged(double position)
 {
     if(app == NULL)
         return;
@@ -107,7 +107,7 @@ void VehicleAppContainer::bccontrolBarPositionChanged(double position)
     }
 }
 
-void VehicleAppContainer::disconnectAppToBCControlBar(VehicleApp* app)
+void BCVehicleAppContainer::disconnectAppToBCControlBar(BCVehicleApp* app)
 {
     if(app == NULL)
         return;
@@ -118,10 +118,10 @@ void VehicleAppContainer::disconnectAppToBCControlBar(VehicleApp* app)
     if(bccontrolBarHardwareInterface == NULL)
         return;
 
-    disconnect(this, &QQuickItem::widthChanged, this, &VehicleAppContainer::updateControlBarWidth);
+    disconnect(this, &QQuickItem::widthChanged, this, &BCVehicleAppContainer::updateControlBarWidth);
 }
 
-void VehicleAppContainer::connectAppToBCControlBar(VehicleApp* app)
+void BCVehicleAppContainer::connectAppToBCControlBar(BCVehicleApp* app)
 {
     if(app == NULL)
         return;
@@ -132,7 +132,7 @@ void VehicleAppContainer::connectAppToBCControlBar(VehicleApp* app)
     if(bccontrolBarHardwareInterface == NULL)
         return;
 
-    connect(this, &QQuickItem::widthChanged, this, &VehicleAppContainer::updateControlBarWidth);
+    connect(this, &QQuickItem::widthChanged, this, &BCVehicleAppContainer::updateControlBarWidth);
     bccontrolBarHardwareInterface->setWidth(width());
 
     QVariant link = QVariant::fromValue<BCControlBarHardwareInterface*>(bccontrolBarHardwareInterface);
@@ -140,7 +140,7 @@ void VehicleAppContainer::connectAppToBCControlBar(VehicleApp* app)
     app->getBCControlBar()->property("anchors").value<QObject*>()->setProperty("fill", link);
 }
 
-void VehicleAppContainer::updateControlBarWidth()
+void BCVehicleAppContainer::updateControlBarWidth()
 {
     bccontrolBarHardwareInterface->setWidth(width());
 }

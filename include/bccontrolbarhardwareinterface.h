@@ -19,7 +19,7 @@
 #ifndef BCCONTROLBARHARDWAREINTERFACE_H
 #define BCCONTROLBARHARDWAREINTERFACE_H
 
-#include "ste15-qsteboardcomputersdk_plugin.h"
+#include <bcsdkcommon.h>
 
 #include <functional>
 

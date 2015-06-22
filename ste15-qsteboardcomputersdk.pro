@@ -35,24 +35,31 @@ SOURCES += \
     vehiclelauncher.cpp \
     vehicleappcontainer.cpp \
     bccontrolbarhardwareinterface.cpp \
-    carsensor.cpp
+    carsensor.cpp \
+    bcvapmanager.cpp \
+    bcvapdescriptor.cpp
 
 HEADERS += \
-    include/ste15-qsteboardcomputersdk_plugin.h \
-    include/vehicleapp.h \
-    include/VehicleApp \
     include/bccontrolbar.h \
     include/BCControlBar \
-    include/controlbarbutton.h \
-    include/ControlBarButton \
-    include/controlbarscrollwheel.h \
-    include/ControlBarScrollWheel \
-    include/vehiclelauncher.h \
-    include/VehicleLauncher \
-    include/vehicleappcontainer.h \
     include/bccontrolbarhardwareinterface.h \
-    include/carsensor.h \
-    include/CARSensor
+    include/BCControlBarHardwareInterface \
+    include/BCCARSensor \
+    include/bccarsensor.h \
+    include/BCControlBarButton \
+    include/bccontrolbarbutton.h \
+    include/BCControlBarScrollWheel \
+    include/bccontrolbarscrollwheel.h \
+    include/BCVehicleApp \
+    include/bcvehicleapp.h \
+    include/BCVehicleAppContainer \
+    include/BCVehicleLauncher \
+    include/bcvehicleappcontainer.h \
+    include/bcvehiclelauncher.h \
+    include/bcsdkcommon.h \
+    ste15-qsteboardcomputersdk_plugin.h \
+    include/bcvapmanager.h \
+    include/bcvapdescriptor.h
 
 DISTFILES = qmldir
 

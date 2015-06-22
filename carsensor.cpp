@@ -16,42 +16,42 @@
  **
  **************************************************************************/
 
-#include "carsensor.h"
+#include "bccarsensor.h"
 
 #include <QCANMessage>
 
-QList<CARSensor*> CARSensor::CARSensorList;
+QList<BCCARSensor*> BCCARSensor::CARSensorList;
 
-CARSensor::CARSensor(QQuickItem *parent)
+BCCARSensor::BCCARSensor(QQuickItem *parent)
     : QQuickItem(parent)
 {
     CARSensorList.append(this);
 }
 
-CARSensor::~CARSensor()
+BCCARSensor::~BCCARSensor()
 {
     CARSensorList.removeOne(this);
 }
 
-CARSensor::SensorType CARSensor::getID()
+BCCARSensor::SensorType BCCARSensor::getID()
 {
     return id;
 }
 
-void CARSensor::setID(CARSensor::SensorType newID)
+void BCCARSensor::setID(BCCARSensor::SensorType newID)
 {
     id = newID;
     emit idChanged(id);
 }
 
-const QVariantMap& CARSensor::getData()
+const QVariantMap& BCCARSensor::getData()
 {
     return data;
 }
 
-void CARSensor::processCANMessage(const QCANMessage& CANMessage)
+void BCCARSensor::processCANMessage(const QCANMessage& CANMessage)
 {
-    foreach(CARSensor* sensor, CARSensorList)
+    foreach(BCCARSensor* sensor, CARSensorList)
     {
         if(sensor->id == CANMessage.getID())
         {

@@ -16,53 +16,53 @@
  **
  **************************************************************************/
 
-#include "vehiclelauncher.h"
+#include "bcvehiclelauncher.h"
 
-#include <VehicleApp>
+#include <BCVehicleApp>
 
-VehicleLauncher::VehicleLauncher(QQuickItem *parent)
+BCVehicleLauncher::BCVehicleLauncher(QQuickItem *parent)
     : QQuickItem(parent)
 {
     ;
 }
 
-VehicleLauncher::~VehicleLauncher()
+BCVehicleLauncher::~BCVehicleLauncher()
 {
     ;
 }
 
-const QList<VehicleApp*>& VehicleLauncher::getAppList() const
+const QList<BCVehicleApp*>& BCVehicleLauncher::getAppList() const
 {
     return apps;
 }
 
-void VehicleLauncher::addApp(VehicleApp* app)
+void BCVehicleLauncher::addApp(BCVehicleApp* app)
 {
     apps.append(app);
     emit appAdded(app);
     emit appsChanged();
 }
 
-void VehicleLauncher::removeApp(VehicleApp* app)
+void BCVehicleLauncher::removeApp(BCVehicleApp* app)
 {
     apps.removeAll(app);
     emit appRemoved(app);
     emit appsChanged();
 }
 
-QQmlListProperty<VehicleApp> VehicleLauncher::getApps()
+QQmlListProperty<BCVehicleApp> BCVehicleLauncher::getApps()
 {
-    return QQmlListProperty<VehicleApp>(this, NULL, &VehicleLauncher::CountFunction, &VehicleLauncher::AtFunction);
+    return QQmlListProperty<BCVehicleApp>(this, NULL, &BCVehicleLauncher::CountFunction, &BCVehicleLauncher::AtFunction);
 }
 
-int VehicleLauncher::CountFunction(QQmlListProperty<VehicleApp>* list)
+int BCVehicleLauncher::CountFunction(QQmlListProperty<BCVehicleApp>* list)
 {
-    VehicleLauncher* launcher = qobject_cast<VehicleLauncher*>(list->object);
+    BCVehicleLauncher* launcher = qobject_cast<BCVehicleLauncher*>(list->object);
     return launcher->apps.count();
 }
 
-VehicleApp* VehicleLauncher::AtFunction(QQmlListProperty<VehicleApp>* list, int index)
+BCVehicleApp* BCVehicleLauncher::AtFunction(QQmlListProperty<BCVehicleApp>* list, int index)
 {
-    VehicleLauncher* launcher = qobject_cast<VehicleLauncher*>(list->object);
+    BCVehicleLauncher* launcher = qobject_cast<BCVehicleLauncher*>(list->object);
     return launcher->apps.at(index);
 }

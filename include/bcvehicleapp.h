@@ -19,16 +19,16 @@
 #ifndef VEHICLEAPP_H
 #define VEHICLEAPP_H
 
-#include "ste15-qsteboardcomputersdk_plugin.h"
+#include <bcsdkcommon.h>
 
 #include <QQuickItem>
 
 class BCControlBar;
 
-class STE15QSTEBOARDCOMPUTERSDKSHARED_EXPORT VehicleApp : public QQuickItem
+class STE15QSTEBOARDCOMPUTERSDKSHARED_EXPORT BCVehicleApp : public QQuickItem
 {
     Q_OBJECT
-    Q_DISABLE_COPY(VehicleApp)
+    Q_DISABLE_COPY(BCVehicleApp)
 
     Q_PROPERTY(QString name READ getName NOTIFY nameChanged)
     Q_PROPERTY(QString description READ getDescription NOTIFY descriptionChanged)
@@ -37,8 +37,8 @@ class STE15QSTEBOARDCOMPUTERSDKSHARED_EXPORT VehicleApp : public QQuickItem
     Q_PROPERTY(BCControlBar* bccontrolbar READ getBCControlBar WRITE setBCControlBar NOTIFY bccontrolbarChanged)
 
 public:
-    explicit VehicleApp(QQuickItem *parent = 0);
-    ~VehicleApp();
+    explicit BCVehicleApp(QQuickItem *parent = 0);
+    ~BCVehicleApp();
 
     const QString& getName() const;
     const QString& getDescription() const;

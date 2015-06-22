@@ -19,36 +19,36 @@
 #ifndef VEHICLEAPPCONTAINER_H
 #define VEHICLEAPPCONTAINER_H
 
-#include "ste15-qsteboardcomputersdk_plugin.h"
+#include <bcsdkcommon.h>
 
 #include <QQuickItem>
 
 #include <BCControlBarHardwareInterface>
 
-class VehicleApp;
+class BCVehicleApp;
 
-class STE15QSTEBOARDCOMPUTERSDKSHARED_EXPORT VehicleAppContainer : public QQuickItem
+class STE15QSTEBOARDCOMPUTERSDKSHARED_EXPORT BCVehicleAppContainer : public QQuickItem
 {
     Q_OBJECT
 
-    Q_PROPERTY(VehicleApp* app READ getApp WRITE setApp NOTIFY appChanged)
+    Q_PROPERTY(BCVehicleApp* app READ getApp WRITE setApp NOTIFY appChanged)
     Q_PROPERTY(BCControlBarHardwareInterface* bccontrolBarHardwareInterface READ getBCControlBarHardwareInterface WRITE setBCControlBarHardwareInterface NOTIFY bccontrolBarHardwareInterfaceChanged)
     Q_PROPERTY(double bccontrolBarOpacity READ getBCControlBarOpacity WRITE setBCControlBarOpacity NOTIFY bccontrolBarOpacityChanged)
 
 public:
-    explicit VehicleAppContainer(QQuickItem* parent = NULL);
-    ~VehicleAppContainer();
+    explicit BCVehicleAppContainer(QQuickItem* parent = NULL);
+    ~BCVehicleAppContainer();
 
-    VehicleApp* getApp();
+    BCVehicleApp* getApp();
     BCControlBarHardwareInterface* getBCControlBarHardwareInterface();
     double getBCControlBarOpacity() const;
 
-    void setApp(VehicleApp*);
+    void setApp(BCVehicleApp*);
     void setBCControlBarHardwareInterface(BCControlBarHardwareInterface*);
     void setBCControlBarOpacity(double);
 
 signals:
-    void appChanged(VehicleApp*);
+    void appChanged(BCVehicleApp*);
     void bccontrolBarHardwareInterfaceChanged(BCControlBarHardwareInterface*);
     void bccontrolBarOpacityChanged(double);
 
@@ -59,12 +59,12 @@ private slots:
     void updateControlBarWidth();
 
 private:
-    VehicleApp* app;
+    BCVehicleApp* app;
     BCControlBarHardwareInterface* bccontrolBarHardwareInterface;
     double bccontrolBarOpacity;
 
-    void disconnectAppToBCControlBar(VehicleApp* app);
-    void connectAppToBCControlBar(VehicleApp* app);
+    void disconnectAppToBCControlBar(BCVehicleApp* app);
+    void connectAppToBCControlBar(BCVehicleApp* app);
 };
 
 #endif // VEHICLEAPPCONTAINER_H

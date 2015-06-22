@@ -16,30 +16,4 @@
  **
  **************************************************************************/
 
-#ifndef STE15_QSTEBOARDCOMPUTERSDK_PLUGIN_H
-#define STE15_QSTEBOARDCOMPUTERSDK_PLUGIN_H
-
-#include <QQmlExtensionPlugin>
-
-#include <QtCore/qglobal.h>
-
-#if defined(STE15QSTEBOARDCOMPUTERSDK_LIBRARY)
-#  define STE15QSTEBOARDCOMPUTERSDKSHARED_EXPORT Q_DECL_EXPORT
-#else
-#  define STE15QSTEBOARDCOMPUTERSDKSHARED_EXPORT Q_DECL_IMPORT
-#endif
-
-class STE15QSTEBOARDCOMPUTERSDKSHARED_EXPORT STE15_QSTEBoardComputerSDKPlugin : public QQmlExtensionPlugin
-{
-    Q_OBJECT
-    Q_PLUGIN_METADATA(IID "org.qt-project.Qt.QQmlExtensionInterface")
-
-public:
-    void registerTypes(const char *uri);
-
-    static constexpr int version_major = 1;
-    static constexpr int version_minor = 0;
-};
-
-#endif // STE15_QSTEBOARDCOMPUTERSDK_PLUGIN_H
-
+#include "bccontrolbarscrollwheel.h"

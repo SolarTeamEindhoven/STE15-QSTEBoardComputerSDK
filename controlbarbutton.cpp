@@ -16,15 +16,15 @@
  **
  **************************************************************************/
 
-#include "controlbarbutton.h"
+#include "bccontrolbarbutton.h"
 
-ControlBarButton::ControlBarButton(QQuickItem *parent)
+BCControlBarButton::BCControlBarButton(QQuickItem *parent)
     : QQuickItem(parent)
 {
     setZ(200);
 }
 
-ControlBarButton::~ControlBarButton()
+BCControlBarButton::~BCControlBarButton()
 {
     ;
 }

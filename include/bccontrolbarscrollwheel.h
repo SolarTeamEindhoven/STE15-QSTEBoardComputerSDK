@@ -16,27 +16,30 @@
  **
  **************************************************************************/
 
-#ifndef CONTROLBARBUTTON_H
-#define CONTROLBARBUTTON_H
+#ifndef CONTROLBARSCROLLWHEEL_H
+#define CONTROLBARSCROLLWHEEL_H
 
-#include "ste15-qsteboardcomputersdk_plugin.h"
+#include <bcsdkcommon.h>
 
 #include <QQuickItem>
 
-class STE15QSTEBOARDCOMPUTERSDKSHARED_EXPORT ControlBarButton : public QQuickItem
+class STE15QSTEBOARDCOMPUTERSDKSHARED_EXPORT BCControlBarScrollWheel : public QQuickItem
 {
     Q_OBJECT
-    Q_DISABLE_COPY(ControlBarButton)
+    Q_DISABLE_COPY(BCControlBarScrollWheel)
 
 public:
-    explicit ControlBarButton(QQuickItem *parent = 0);
-    virtual ~ControlBarButton();
+    static constexpr double singleTickRotationAngle = 20;
+
+    explicit BCControlBarScrollWheel(QQuickItem *parent = 0);
+    ~BCControlBarScrollWheel();
 
 signals:
+    void rotation(double angle);
 
 public slots:
-
-private:
+    void rotateUp();
+    void rotateDown();
 };
 
-#endif // CONTROLBARBUTTON_H
+#endif // CONTROLBARSCROLLWHEEL_H

@@ -19,24 +19,24 @@
 #ifndef BCCONTROLBAR_H
 #define BCCONTROLBAR_H
 
-#include "ste15-qsteboardcomputersdk_plugin.h"
+#include <bcsdkcommon.h>
 
 #include <QQuickItem>
 
-class ControlBarButton;
-class ControlBarScrollWheel;
+class BCControlBarButton;
+class BCControlBarScrollWheel;
 
 class STE15QSTEBOARDCOMPUTERSDKSHARED_EXPORT BCControlBar : public QQuickItem
 {
     Q_OBJECT
     Q_DISABLE_COPY(BCControlBar)
 
-    Q_PROPERTY(ControlBarButton* leftButton READ getLeftButton WRITE setLeftButton NOTIFY leftButtonChanged)
-    Q_PROPERTY(ControlBarButton* middleButton READ getMiddleButton WRITE setMiddleButton NOTIFY middleButtonChanged)
-    Q_PROPERTY(ControlBarButton* rightButton READ getRightButton WRITE setRightButton NOTIFY rightButtonChanged)
+    Q_PROPERTY(BCControlBarButton* leftButton READ getLeftButton WRITE setLeftButton NOTIFY leftButtonChanged)
+    Q_PROPERTY(BCControlBarButton* middleButton READ getMiddleButton WRITE setMiddleButton NOTIFY middleButtonChanged)
+    Q_PROPERTY(BCControlBarButton* rightButton READ getRightButton WRITE setRightButton NOTIFY rightButtonChanged)
 
-    Q_PROPERTY(ControlBarScrollWheel* leftScrollWheel READ getLeftScrollWheel WRITE setLeftScrollWheel NOTIFY leftScrollWheelChanged)
-    Q_PROPERTY(ControlBarScrollWheel* rightScrollWheel READ getRightScrollWheel WRITE setRightScrollWheel NOTIFY rightScrollWheelChanged)
+    Q_PROPERTY(BCControlBarScrollWheel* leftScrollWheel READ getLeftScrollWheel WRITE setLeftScrollWheel NOTIFY leftScrollWheelChanged)
+    Q_PROPERTY(BCControlBarScrollWheel* rightScrollWheel READ getRightScrollWheel WRITE setRightScrollWheel NOTIFY rightScrollWheelChanged)
 
     Q_CLASSINFO("DefaultProperty", "null")
 
@@ -54,27 +54,27 @@ public:
     explicit BCControlBar(QQuickItem *parent = 0);
     ~BCControlBar();
 
-    ControlBarButton* getLeftButton();
-    ControlBarButton* getMiddleButton();
-    ControlBarButton* getRightButton();
+    BCControlBarButton* getLeftButton();
+    BCControlBarButton* getMiddleButton();
+    BCControlBarButton* getRightButton();
 
-    ControlBarScrollWheel* getLeftScrollWheel();
-    ControlBarScrollWheel* getRightScrollWheel();
+    BCControlBarScrollWheel* getLeftScrollWheel();
+    BCControlBarScrollWheel* getRightScrollWheel();
 
-    void setLeftButton(ControlBarButton* newLeftButton);
-    void setMiddleButton(ControlBarButton* newMiddleButton);
-    void setRightButton(ControlBarButton* newRightButton);
+    void setLeftButton(BCControlBarButton* newLeftButton);
+    void setMiddleButton(BCControlBarButton* newMiddleButton);
+    void setRightButton(BCControlBarButton* newRightButton);
 
-    void setLeftScrollWheel(ControlBarScrollWheel* newLeftScrollWheel);
-    void setRightScrollWheel(ControlBarScrollWheel* newRightScrollWheel);
+    void setLeftScrollWheel(BCControlBarScrollWheel* newLeftScrollWheel);
+    void setRightScrollWheel(BCControlBarScrollWheel* newRightScrollWheel);
 
 signals:
-    void leftButtonChanged(ControlBarButton* newLeftButton);
-    void middleButtonChanged(ControlBarButton* newMiddleButton);
-    void rightButtonChanged(ControlBarButton* newRightButton);
+    void leftButtonChanged(BCControlBarButton* newLeftButton);
+    void middleButtonChanged(BCControlBarButton* newMiddleButton);
+    void rightButtonChanged(BCControlBarButton* newRightButton);
 
-    void leftScrollWheelChanged(ControlBarScrollWheel* newLeftScrollWheel);
-    void rightScrollWheelChanged(ControlBarScrollWheel* newRightScrollWheel);
+    void leftScrollWheelChanged(BCControlBarScrollWheel* newLeftScrollWheel);
+    void rightScrollWheelChanged(BCControlBarScrollWheel* newRightScrollWheel);
 
 public slots:
 
@@ -84,12 +84,12 @@ private slots:
     void updateWidth();
 
 private:
-    ControlBarButton* leftButton;
-    ControlBarButton* middleButton;
-    ControlBarButton* rightButton;
+    BCControlBarButton* leftButton;
+    BCControlBarButton* middleButton;
+    BCControlBarButton* rightButton;
 
-    ControlBarScrollWheel* leftScrollWheel;
-    ControlBarScrollWheel* rightScrollWheel;
+    BCControlBarScrollWheel* leftScrollWheel;
+    BCControlBarScrollWheel* rightScrollWheel;
 
     void setParentToThis(QQuickItem* item);
 
@@ -102,8 +102,8 @@ private:
     void updateRightScrollWheelProperties(double dpmm);
 
     void updateDpiProperties();
-    void updateButtonDpiProperties(ControlBarButton* button, double location, double dpmm);
-    void updateScrollWheelDpiProperties(ControlBarScrollWheel* scrollWheel, double location, double dpmm);
+    void updateButtonDpiProperties(BCControlBarButton* button, double location, double dpmm);
+    void updateScrollWheelDpiProperties(BCControlBarScrollWheel* scrollWheel, double location, double dpmm);
 };
 
 #endif // BCCONTROLBAR_H

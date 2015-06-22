@@ -16,25 +16,25 @@
  **
  **************************************************************************/
 
-#include "controlbarscrollwheel.h"
+#include "bccontrolbarscrollwheel.h"
 
-ControlBarScrollWheel::ControlBarScrollWheel(QQuickItem *parent)
+BCControlBarScrollWheel::BCControlBarScrollWheel(QQuickItem *parent)
     : QQuickItem(parent)
 {
     setZ(200);
 }
 
-ControlBarScrollWheel::~ControlBarScrollWheel()
+BCControlBarScrollWheel::~BCControlBarScrollWheel()
 {
     ;
 }
 
-void ControlBarScrollWheel::rotateUp()
+void BCControlBarScrollWheel::rotateUp()
 {
     emit rotation(singleTickRotationAngle);
 }
 
-void ControlBarScrollWheel::rotateDown()
+void BCControlBarScrollWheel::rotateDown()
 {
     emit rotation(-singleTickRotationAngle);
 }

@@ -16,43 +16,43 @@
  **
  **************************************************************************/
 
-#include "vehicleapp.h"
+#include "bcvehicleapp.h"
 
 #include <BCControlBar>
 
-VehicleApp::VehicleApp(QQuickItem *parent)
+BCVehicleApp::BCVehicleApp(QQuickItem *parent)
     : QQuickItem(parent)
     , bccontrolbar(NULL)
 {
     ;
 }
 
-VehicleApp::~VehicleApp()
+BCVehicleApp::~BCVehicleApp()
 {
     ;
 }
 
-const QString& VehicleApp::getName() const
+const QString& BCVehicleApp::getName() const
 {
     return name;
 }
 
-const QString& VehicleApp::getDescription() const
+const QString& BCVehicleApp::getDescription() const
 {
     return description;
 }
 
-const QString& VehicleApp::getCategory() const
+const QString& BCVehicleApp::getCategory() const
 {
     return category;
 }
 
-BCControlBar* VehicleApp::getBCControlBar()
+BCControlBar* BCVehicleApp::getBCControlBar()
 {
     return bccontrolbar;
 }
 
-void VehicleApp::setBCControlBar(BCControlBar* newBCControlbar)
+void BCVehicleApp::setBCControlBar(BCControlBar* newBCControlbar)
 {
     bccontrolbar = newBCControlbar;
     emit bccontrolbarChanged(newBCControlbar);

@@ -16,4 +16,27 @@
  **
  **************************************************************************/
 
-#include "vehicleapp.h"
+#ifndef CONTROLBARBUTTON_H
+#define CONTROLBARBUTTON_H
+
+#include <bcsdkcommon.h>
+
+#include <QQuickItem>
+
+class STE15QSTEBOARDCOMPUTERSDKSHARED_EXPORT BCControlBarButton : public QQuickItem
+{
+    Q_OBJECT
+    Q_DISABLE_COPY(BCControlBarButton)
+
+public:
+    explicit BCControlBarButton(QQuickItem *parent = 0);
+    virtual ~BCControlBarButton();
+
+signals:
+
+public slots:
+
+private:
+};
+
+#endif // CONTROLBARBUTTON_H
