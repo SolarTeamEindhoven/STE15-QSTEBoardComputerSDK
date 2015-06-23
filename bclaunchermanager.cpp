@@ -11,7 +11,7 @@ BCLauncherManager::BCLauncherManager(QObject* parent)
 
 BCLauncherManager::~BCLauncherManager()
 {
-    //instances.remove(this);
+    instances.remove(this);
 }
 
 QQmlListProperty<BCLauncherDescriptor> BCLauncherManager::getAvailableLaunchers()
