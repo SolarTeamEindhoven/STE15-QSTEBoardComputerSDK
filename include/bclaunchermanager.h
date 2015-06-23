@@ -1,12 +1,14 @@
 #ifndef BCLAUNCHERMANAGER_H
 #define BCLAUNCHERMANAGER_H
-
-#include <BCLauncherDescriptor>
-
+// Qt includes
 #include <QObject>
 #include <QQmlListProperty>
 
+// C++ includes
 #include <vector>
+
+// STE includes
+#include <BCLauncherDescriptor>
 
 template <typename T>
 class QVector;

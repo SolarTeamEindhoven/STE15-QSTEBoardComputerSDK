@@ -11,7 +11,7 @@ BCLauncherManager::BCLauncherManager(QObject* parent)
 
 BCLauncherManager::~BCLauncherManager()
 {
-    instances.remove(this);
+//    instances.remove(this);
 }
 
 QQmlListProperty<BCLauncherDescriptor> BCLauncherManager::getAvailableLaunchers()
@@ -70,11 +70,11 @@ BCLauncherDescriptor* BCLauncherManager::appendLauncher(const QString& identifie
     return result;
 }
 
-BCLauncherDescriptor* BCLauncherManager::appendLauncher(const BCLauncherDescriptor& newVAP)
+BCLauncherDescriptor* BCLauncherManager::appendLauncher(const BCLauncherDescriptor& newLauncher)
 {
     BCLauncherDescriptor* result;
 
-    descriptors.push_back(newVAP);
+    descriptors.push_back(newLauncher);
     result = &descriptors.back();
 
     foreach(BCLauncherManager* instance, instances)
