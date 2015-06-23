@@ -11,7 +11,7 @@ BCAppManager::BCAppManager(QObject* parent)
 
 BCAppManager::~BCAppManager()
 {
-//    instances.remove(this);
+    instances.removeAll(this);
 }
 
 QQmlListProperty<BCAppDescriptor> BCAppManager::getAvailableApps()
