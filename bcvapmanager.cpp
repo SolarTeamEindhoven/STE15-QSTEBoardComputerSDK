@@ -11,7 +11,7 @@ BCVAPManager::BCVAPManager(QObject* parent)
 
 BCVAPManager::~BCVAPManager()
 {
-    instances.remove(this);
+//    instances.remove(this);
 }
 
 QQmlListProperty<BCVAPDescriptor> BCVAPManager::getAvailableVAPs()
