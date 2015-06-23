@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 ###########################################################################
 ##
@@ -28,10 +28,11 @@ FILE=$2
 
 THISPATH="$PWD/$0"
 while : ; do
+    echo "$THISPATH"
     DIR=$(dirname "$THISPATH")
     NEWTHISPATH=$(readlink -f "$THISPATH")
-    [[ $? -eq 0 ]] || break
-    [[ "$NEWTHISPATH" != "$THISPATH" ]] || break
+    [ $? -eq 0 ] || break
+    [ "$NEWTHISPATH" != "$THISPATH" ] || break
     THISPATH="$NEWTHISPATH"
 done
 
@@ -80,6 +81,6 @@ done
 echo "</qresource>" >> $XMLOUTFILE
 echo "</RCC>" >> $XMLOUTFILE
 
-rcc-qt5 -o "$OUTFILE" -binary "$XMLOUTFILE"
+rcc -o "$OUTFILE" -binary "$XMLOUTFILE"
 
 rm "$XMLOUTFILE"
