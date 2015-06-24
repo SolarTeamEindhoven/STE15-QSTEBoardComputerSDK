@@ -2,6 +2,7 @@
 
 #include <QVector>
 #include <QUrl>
+#include <BCQMLCreator>
 
 BCAppManager::BCAppManager(QObject* parent)
     : QObject(parent)
@@ -17,6 +18,11 @@ BCAppManager::~BCAppManager()
 QQmlListProperty<BCAppDescriptor> BCAppManager::getAvailableApps()
 {
     return QQmlListProperty<BCAppDescriptor>(this, NULL, &BCAppManager::CountFunction, &BCAppManager::AtFunction);
+}
+
+BCVehicleApp* BCAppManager::createApp(BCAppDescriptor* descriptor)
+{
+    return BCQMLCreator::constructQMLAppObject(*descriptor);
 }
 
 QString BCAppManager::uniqueIdentifier(const QString& name)
@@ -50,24 +56,6 @@ int BCAppManager::CountFunction(QQmlListProperty<BCAppDescriptor>*)
 BCAppDescriptor* BCAppManager::AtFunction(QQmlListProperty<BCAppDescriptor>*, int index)
 {
     return &BCAppManager::descriptors.at(index);
-}
-
-BCAppDescriptor* BCAppManager::appendApp(const QString& name, const QString& description)
-{
-    return appendApp(uniqueIdentifier(name), name, description);
-}
-
-BCAppDescriptor* BCAppManager::appendApp(const QString& identifier, const QString& name, const QString& description)
-{
-    BCAppDescriptor* result;
-
-    descriptors.emplace_back(identifier, name, description);
-    result = &descriptors.back();
-
-    foreach(BCAppManager* instance, instances)
-        emit instance->availableAppsChanged();
-
-    return result;
 }
 
 BCAppDescriptor* BCAppManager::appendApp(const BCAppDescriptor& newApp)
