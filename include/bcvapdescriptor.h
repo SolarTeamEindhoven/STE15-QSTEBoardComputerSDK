@@ -20,10 +20,12 @@ public:
         Installing,
         Ready,
         DeinstallPending,
-        Deinstalling
+        Deinstalling,
+        None
     };
 
     explicit BCVAPDescriptor(const QString& identifier, const QString& name, const QString& description, const QString& updateUrl, Status status, QObject* parent = NULL);
+    explicit BCVAPDescriptor(QObject *parent = 0);
     ~BCVAPDescriptor();
 
     BCVAPDescriptor(const BCVAPDescriptor&); //!< Cause gcc thinks the object if difficult to copy...
