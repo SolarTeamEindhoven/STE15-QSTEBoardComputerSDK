@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 ###########################################################################
 ##
@@ -19,14 +19,14 @@
 ###########################################################################
 
 if [ $# -lt 3 ]; then
-	echo "Usge: $0 <output file> <manifext file> <input files...>"
+	echo "Usage: $0 <output file> <manifext file> <input files...>"
 	exit 1;
 fi
 
 OUTFILE=$1
 FILE=$2
 
-THISPATH="$PWD/$0"
+THISPATH="$0"
 while : ; do
     DIR=$(dirname "$THISPATH")
     NEWTHISPATH=$(readlink -f "$THISPATH")
@@ -80,6 +80,21 @@ done
 echo "</qresource>" >> $XMLOUTFILE
 echo "</RCC>" >> $XMLOUTFILE
 
-rcc-qt5 -o "$OUTFILE" -binary "$XMLOUTFILE"
+function ExecExists() {
+	(which $1 >/dev/null 2>&1 && exit 0) || exit 1
+}
+
+if [ -e "$OE_QMAKE_RCC" ]; then
+    RCC="$OE_QMAKE_RCC"
+elif ExecExists rcc-qt5; then
+    RCC="rcc-qt5"
+elif ExecExists rcc; then
+    RCC="rcc"
+else
+    echo "Could not find rcc, please install!!" >&2
+    exit 1
+fi
+
+$RCC -o "$OUTFILE" -binary "$XMLOUTFILE"
 
 rm "$XMLOUTFILE"
