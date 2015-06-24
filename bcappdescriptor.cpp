@@ -9,6 +9,15 @@ BCAppDescriptor::BCAppDescriptor(const QString &identifier, const QString &name,
     ;
 }
 
+BCAppDescriptor::BCAppDescriptor(QObject *parent)
+    : QObject(parent)
+    , identifier(QString::null)
+    , name(QString::null)
+    , description(QString::null)
+{
+    ;
+}
+
 BCAppDescriptor::~BCAppDescriptor()
 {
     ;
@@ -38,6 +47,16 @@ const QString& BCAppDescriptor::getDescription() const
     return description;
 }
 
+const QUrl& BCAppDescriptor::getEntryPoint() const
+{
+    return entryPoint;
+}
+
+const QList<QString>& BCAppDescriptor::getDynLibFiles() const
+{
+    return dynLibFiles;
+}
+
 void BCAppDescriptor::setIdentifier(const QString& newIdentifier)
 {
     if(identifier == newIdentifier)
@@ -65,4 +84,19 @@ void BCAppDescriptor::setDescription(const QString& newDescription)
     emit descriptionChanged();
 }
 
+void BCAppDescriptor::setEntryPoint(const QUrl& newEntryPoint)
+{
+    if (entryPoint == newEntryPoint)
+        return;
+    entryPoint = newEntryPoint;
+    emit entryPointChanged();
+}
+
+void BCAppDescriptor::setDynLibFiles(const QList<QString>& newDynLibFiles)
+{
+    if (dynLibFiles == newDynLibFiles)
+        return;
+    dynLibFiles = newDynLibFiles;
+    emit dynamicLibraryFilesChanged();
+}
 
