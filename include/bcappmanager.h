@@ -20,7 +20,7 @@ class BCAppManager : public QObject
     Q_OBJECT
     Q_DISABLE_COPY(BCAppManager)
 
-    Q_PROPERTY(QQmlListProperty<BCLauncherDescriptor> availableApps READ getAvailableApps NOTIFY availableAppsChanged)
+    Q_PROPERTY(QQmlListProperty<BCAppDescriptor> availableApps READ getAvailableApps NOTIFY availableAppsChanged)
 
 public:
     explicit BCAppManager(QObject* parent = 0);

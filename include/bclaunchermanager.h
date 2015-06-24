@@ -26,6 +26,12 @@ public:
     ~BCLauncherManager();
 
     QQmlListProperty<BCLauncherDescriptor> getAvailableLaunchers();
+
+    /**
+     * @brief getLauncher Obtain a launcher from the description
+     * @return The launcher
+     */
+    Q_INVOKABLE BCVehicleLauncher* getLauncher(BCLauncherDescriptor*);
 signals:
     void availableLaunchersChanged();
 

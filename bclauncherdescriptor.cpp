@@ -10,6 +10,15 @@ BCLauncherDescriptor::BCLauncherDescriptor(const QString &identifier, const QStr
     ;
 }
 
+BCLauncherDescriptor::BCLauncherDescriptor(QObject *parent)
+    : QObject(parent)
+    , identifier(QString::null)
+    , name(QString::null)
+    , description(QString::null)
+{
+    ;
+}
+
 BCLauncherDescriptor::~BCLauncherDescriptor()
 {
     ;

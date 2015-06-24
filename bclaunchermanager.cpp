@@ -19,6 +19,12 @@ QQmlListProperty<BCLauncherDescriptor> BCLauncherManager::getAvailableLaunchers(
     return QQmlListProperty<BCLauncherDescriptor>(this, NULL, &BCLauncherManager::CountFunction, &BCLauncherManager::AtFunction);
 }
 
+BCVehicleLauncher* BCLauncherManager::getLauncher(BCLauncherDescriptor* description)
+{
+    BCVehicleLauncher* newLauncher = new BCVehicleLauncher();
+    return newLauncher;
+}
+
 QString BCLauncherManager::uniqueIdentifier(const QString& name)
 {
     QString identifier = name;

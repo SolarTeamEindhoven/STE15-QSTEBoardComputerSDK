@@ -11,6 +11,18 @@ BCVAPDescriptor::BCVAPDescriptor(const QString &identifier, const QString &name,
     ;
 }
 
+
+BCVAPDescriptor::BCVAPDescriptor(QObject *parent)
+    : QObject(parent)
+    , identifier(QString::null)
+    , name(QString::null)
+    , description(QString::null)
+    , updateUrl(QString::null)
+    , status(Status::None)
+{
+    ;
+}
+
 BCVAPDescriptor::~BCVAPDescriptor()
 {
     ;
