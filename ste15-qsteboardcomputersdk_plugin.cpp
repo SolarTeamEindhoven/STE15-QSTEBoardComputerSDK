@@ -29,6 +29,12 @@
 #include <BCControlBarHardwareInterface>
 #include <BCVehicleAppContainer>
 #include <BCCARSensor>
+#include <BCVAPManager>
+#include <BCAppManager>
+#include <BCLauncherManager>
+#include <BCAppDescriptor>
+#include <BCLauncherDescriptor>
+#include <BCVAPDescriptor>
 
 static constexpr char uri[] = "nl.solarteameindhoven.sdk";
 static constexpr int version_major = 1;
@@ -48,6 +54,12 @@ void STE15_QSTEBoardComputerSDKPlugin::registerTypes(const char *uri)
     REGISTER(BCControlBarHardwareInterface);
     REGISTER(BCVehicleAppContainer);
     REGISTER(BCCARSensor);
+    REGISTER(BCAppManager);
+    REGISTER(BCLauncherManager);
+    REGISTER(BCVAPManager);
+    REGISTER(BCAppDescriptor);
+    REGISTER(BCLauncherDescriptor);
+    REGISTER(BCVAPDescriptor);
 }
 //*/
 
@@ -64,6 +76,12 @@ void STE15QSTEBOARDCOMPUTERSDKSHARED_EXPORT registerBCSDKQMLTypes()
     REGISTER(BCVehicleApp);
     REGISTER(BCVehicleLauncher);
     REGISTER(BCVehicleAppContainer);
+    REGISTER(BCAppManager);
+    REGISTER(BCLauncherManager);
+    REGISTER(BCVAPManager);
+    REGISTER(BCAppDescriptor);
+    REGISTER(BCLauncherDescriptor);
+    REGISTER(BCVAPDescriptor);
 
     qWarning() << "Hoi 2";
 }

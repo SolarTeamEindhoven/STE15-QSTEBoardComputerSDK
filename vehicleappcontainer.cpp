@@ -53,7 +53,10 @@ double BCVehicleAppContainer::getBCControlBarOpacity() const
 void BCVehicleAppContainer::setApp(BCVehicleApp* newApp)
 {
     disconnectAppToBCControlBar(app);
-
+    if (newApp == NULL)
+    {
+        return;
+    }
     app = newApp;
 
     QVariant linkToThis = QVariant::fromValue<BCVehicleAppContainer*>(this);
