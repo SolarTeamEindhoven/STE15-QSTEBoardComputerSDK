@@ -3,6 +3,8 @@
 #include <QVector>
 #include <QUrl>
 
+#include <BCQMLCreator>
+
 BCLauncherManager::BCLauncherManager(QObject* parent)
     : QObject(parent)
 {
@@ -19,10 +21,10 @@ QQmlListProperty<BCLauncherDescriptor> BCLauncherManager::getAvailableLaunchers(
     return QQmlListProperty<BCLauncherDescriptor>(this, NULL, &BCLauncherManager::CountFunction, &BCLauncherManager::AtFunction);
 }
 
-BCVehicleLauncher* BCLauncherManager::getLauncher(BCLauncherDescriptor* description)
+BCVehicleLauncher* BCLauncherManager::createLauncher(BCLauncherDescriptor* description)
 {
-    BCVehicleLauncher* newLauncher = new BCVehicleLauncher();
-    return newLauncher;
+
+    return BCQMLCreator::constructQMLLauncherObject(*description);
 }
 
 QString BCLauncherManager::uniqueIdentifier(const QString& name)
@@ -56,24 +58,6 @@ int BCLauncherManager::CountFunction(QQmlListProperty<BCLauncherDescriptor>*)
 BCLauncherDescriptor* BCLauncherManager::AtFunction(QQmlListProperty<BCLauncherDescriptor>*, int index)
 {
     return &BCLauncherManager::descriptors.at(index);
-}
-
-BCLauncherDescriptor* BCLauncherManager::appendLauncher(const QString& name, const QString& description)
-{
-    return appendLauncher(uniqueIdentifier(name), name, description);
-}
-
-BCLauncherDescriptor* BCLauncherManager::appendLauncher(const QString& identifier, const QString& name, const QString& description)
-{
-    BCLauncherDescriptor* result;
-
-    descriptors.emplace_back(identifier, name, description);
-    result = &descriptors.back();
-
-    foreach(BCLauncherManager* instance, instances)
-        emit instance->availableLaunchersChanged();
-
-    return result;
 }
 
 BCLauncherDescriptor* BCLauncherManager::appendLauncher(const BCLauncherDescriptor& newLauncher)

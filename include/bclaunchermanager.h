@@ -1,8 +1,10 @@
 #ifndef BCLAUNCHERMANAGER_H
 #define BCLAUNCHERMANAGER_H
+
 // Qt includes
 #include <QObject>
 #include <QQmlListProperty>
+#include <QQmlEngine>
 
 // C++ includes
 #include <vector>
@@ -31,13 +33,11 @@ public:
      * @brief getLauncher Obtain a launcher from the description
      * @return The launcher
      */
-    Q_INVOKABLE BCVehicleLauncher* getLauncher(BCLauncherDescriptor*);
+    Q_INVOKABLE BCVehicleLauncher* createLauncher(BCLauncherDescriptor*);
 signals:
     void availableLaunchersChanged();
 
 private slots:
-    static BCLauncherDescriptor* appendLauncher(const QString& name, const QString& description);
-    static BCLauncherDescriptor* appendLauncher(const QString& identifier, const QString& name, const QString& description);
     static BCLauncherDescriptor* appendLauncher(const BCLauncherDescriptor&);
 
 private:
