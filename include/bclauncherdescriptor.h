@@ -2,6 +2,7 @@
 #define BCLAUNCHERDESCRIPTOR_H
 
 #include <QObject>
+#include <BCVehicleLauncher>
 
 class BCLauncherDescriptor : public QObject
 {
@@ -12,6 +13,7 @@ class BCLauncherDescriptor : public QObject
     Q_PROPERTY(QString description READ getDescription NOTIFY descriptionChanged)
 public:
     explicit BCLauncherDescriptor(const QString& identifier, const QString& name, const QString& description, QObject *parent = 0);
+    explicit BCLauncherDescriptor(QObject *parent = 0);
     ~BCLauncherDescriptor();
 
     BCLauncherDescriptor(const BCLauncherDescriptor& origin);
