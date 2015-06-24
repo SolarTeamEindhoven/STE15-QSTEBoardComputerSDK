@@ -47,6 +47,11 @@ const QString& BCAppDescriptor::getDescription() const
     return description;
 }
 
+const QString& BCAppDescriptor::getCategory() const
+{
+    return category;
+}
+
 const QUrl& BCAppDescriptor::getEntryPoint() const
 {
     return entryPoint;
@@ -82,6 +87,15 @@ void BCAppDescriptor::setDescription(const QString& newDescription)
 
     description = newDescription;
     emit descriptionChanged();
+}
+
+void BCAppDescriptor::setCategory(const QString& newCategory)
+{
+    if(category == newCategory)
+        return;
+
+    category = newCategory;
+    emit categoryChanged();
 }
 
 void BCAppDescriptor::setEntryPoint(const QUrl& newEntryPoint)

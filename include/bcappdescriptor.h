@@ -12,8 +12,8 @@ class BCAppDescriptor : public QObject
     Q_PROPERTY(QString identifier READ getIdentifier NOTIFY identifierChanged)
     Q_PROPERTY(QString name READ getName NOTIFY nameChanged)
     Q_PROPERTY(QString description READ getDescription NOTIFY descriptionChanged)
-    Q_PROPERTY(QString entryPoint READ getEntryPoint NOTIFY entryPointChanged)
-    Q_PROPERTY(QString dynLibFiles READ getDynLibFiles NOTIFY dynamicLibraryFilesChanged)
+    Q_PROPERTY(QUrl entryPoint READ getEntryPoint NOTIFY entryPointChanged)
+    Q_PROPERTY(QList<QString> dynLibFiles READ getDynLibFiles NOTIFY dynamicLibraryFilesChanged)
 public:
     explicit BCAppDescriptor(const QString& identifier, const QString& name, const QString& description, QObject *parent = 0);
     explicit BCAppDescriptor(QObject *parent = 0);
@@ -39,6 +39,12 @@ public:
     const QString& getDescription() const;
 
     /**
+     * @brief getCategory Obtain the category of the app
+     * @return The category
+     */
+    const QString& getCategory() const;
+
+    /**
      * @brief getEntryPoint Obtain the entry point of the app
      * @return
      */
@@ -53,6 +59,7 @@ public:
 signals:
     void identifierChanged();
     void nameChanged();
+    void categoryChanged();
     void descriptionChanged();
     void entryPointChanged();
     void dynamicLibraryFilesChanged();
@@ -61,12 +68,14 @@ private:
     QString identifier;
     QString name;
     QString description;
+    QString category;
     QUrl entryPoint;
     QList<QString> dynLibFiles;
 
     void setIdentifier(const QString&);
     void setName(const QString&);
     void setDescription(const QString&);
+    void setCategory(const QString&);
     void setEntryPoint(const QUrl&);
     void setDynLibFiles(const QList<QString>&);
 
