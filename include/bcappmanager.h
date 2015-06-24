@@ -8,8 +8,12 @@
 // C++ includes
 #include <vector>
 
+// Qt includes
+#include <QQmlEngine>
+
 // STE includes
 #include <BCAppDescriptor>
+#include <BCVehicleApp>
 
 template <typename T>
 class QVector;
@@ -27,12 +31,11 @@ public:
     ~BCAppManager();
 
     QQmlListProperty<BCAppDescriptor> getAvailableApps();
+    Q_INVOKABLE BCVehicleApp* createApp(BCAppDescriptor *descriptor);
 signals:
     void availableAppsChanged();
 
 private slots:
-    static BCAppDescriptor* appendApp(const QString& name, const QString& description);
-    static BCAppDescriptor* appendApp(const QString& identifier, const QString& name, const QString& description);
     static BCAppDescriptor* appendApp(const BCAppDescriptor&);
 
 private:

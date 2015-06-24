@@ -1,10 +1,19 @@
 #include "bcappdescriptor.h"
 
-BCAppDescriptor::BCAppDescriptor(const QString &identifier, const QString &name, const QString &description, QObject *parent)
+BCAppDescriptor::BCAppDescriptor(const QString &identifier,
+                                 const QString &name,
+                                 const QString &description,
+                                 const QString &category,
+                                 const QUrl &entrypoint,
+                                 const QList<QString> &dynLibFiles,
+                                 QObject *parent)
     : QObject(parent)
     , identifier(identifier)
     , name(name)
     , description(description)
+    , category(category)
+    , entryPoint(entrypoint)
+    , dynLibFiles(dynLibFiles)
 {
     ;
 }
@@ -14,6 +23,9 @@ BCAppDescriptor::BCAppDescriptor(QObject *parent)
     , identifier(QString::null)
     , name(QString::null)
     , description(QString::null)
+    , category(QString::null)
+    , entryPoint(QUrl())
+    , dynLibFiles(QList<QString>())
 {
     ;
 }
@@ -28,6 +40,9 @@ BCAppDescriptor::BCAppDescriptor(const BCAppDescriptor& origin)
     , identifier(origin.identifier)
     , name(origin.name)
     , description(origin.description)
+    , category(origin.category)
+    , entryPoint(origin.entryPoint)
+    , dynLibFiles(origin.dynLibFiles)
 {
     ;
 }

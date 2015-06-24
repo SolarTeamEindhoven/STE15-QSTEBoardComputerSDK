@@ -75,7 +75,8 @@ HEADERS += \
     include/BCVAPManager \
     include/bcappdescriptor.h \
     include/BCAppDescriptor \
-    include/bcqmlcreator.h
+    include/bcqmlcreator.h \
+    include/BCQMLCreator
 
 DISTFILES = qmldir
 

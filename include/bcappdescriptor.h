@@ -12,10 +12,17 @@ class BCAppDescriptor : public QObject
     Q_PROPERTY(QString identifier READ getIdentifier NOTIFY identifierChanged)
     Q_PROPERTY(QString name READ getName NOTIFY nameChanged)
     Q_PROPERTY(QString description READ getDescription NOTIFY descriptionChanged)
+    Q_PROPERTY(QString category READ getCategory NOTIFY categoryChanged)
     Q_PROPERTY(QUrl entryPoint READ getEntryPoint NOTIFY entryPointChanged)
     Q_PROPERTY(QList<QString> dynLibFiles READ getDynLibFiles NOTIFY dynamicLibraryFilesChanged)
 public:
-    explicit BCAppDescriptor(const QString& identifier, const QString& name, const QString& description, QObject *parent = 0);
+    explicit BCAppDescriptor(const QString& identifier,
+                             const QString& name,
+                             const QString& description,
+                             const QString& category,
+                             const QUrl& entrypoint,
+                             const QList<QString>& dynLibFiles,
+                             QObject *parent = 0);
     explicit BCAppDescriptor(QObject *parent = 0);
     ~BCAppDescriptor();
 
