@@ -23,7 +23,6 @@ QQmlListProperty<BCLauncherDescriptor> BCLauncherManager::getAvailableLaunchers(
 
 BCVehicleLauncher* BCLauncherManager::createLauncher(BCLauncherDescriptor* description)
 {
-
     return BCQMLCreator::constructQMLLauncherObject(*description);
 }
 
