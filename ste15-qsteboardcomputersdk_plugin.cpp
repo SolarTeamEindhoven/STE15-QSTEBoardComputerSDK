@@ -65,8 +65,6 @@ void STE15_QSTEBoardComputerSDKPlugin::registerTypes(const char *uri)
 
 void STE15QSTEBOARDCOMPUTERSDKSHARED_EXPORT registerBCSDKQMLTypes()
 {
-    qDebug() << "Hoi 1";
-
     // @uri nl.solarteameindhoven.sdk
     REGISTER(BCCARSensor);
     REGISTER(BCControlBarButton);
@@ -82,8 +80,6 @@ void STE15QSTEBOARDCOMPUTERSDKSHARED_EXPORT registerBCSDKQMLTypes()
     REGISTER(BCAppDescriptor);
     REGISTER(BCLauncherDescriptor);
     REGISTER(BCVAPDescriptor);
-
-    qWarning() << "Hoi 2";
 }
 
 /*
