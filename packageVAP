@@ -26,9 +26,13 @@ fi
 OUTFILE=$1
 FILE=$2
 
+echo "-----------------------------------"
+echo "Solar Team Eindhoven VAP builder"
+echo "-----------------------------------"
+echo "Building using manifest: $2"
+
 THISPATH="$0"
 while : ; do
-    echo "$THISPATH"
     DIR=$(dirname "$THISPATH")
     NEWTHISPATH=$(readlink -f "$THISPATH")
     [ $? -eq 0 ] || break
@@ -53,7 +57,7 @@ echo "$REQUIRED_DL" | while read line ; do
     for i in ${@:3}
     do
         THISFILE=`basename "$i"`
-        if [ "$THISFILE" = "$line" ]; then
+ 	if [ "$THISFILE" = "$line" ]; then
             FOUNDIT=1
             break
         fi
@@ -66,6 +70,8 @@ echo "$REQUIRED_DL" | while read line ; do
 done
 fi
 
+echo "Creating XML outfile.."
+
 XMLOUTFILE="$OUTFILE.xml"
 echo "<!DOCTYPE RCC>" > $XMLOUTFILE
 echo "<RCC version=\"1.0\">" >> $XMLOUTFILE
@@ -75,14 +81,17 @@ echo "<file alias=\"MANIFEST.xml\">$FILE</file>" >> $XMLOUTFILE
 for i in ${@:3}
 do
     FILEBASE=`basename "$i"`
+    echo "Adding file: $FILEBASE"
     echo "<file alias=\"$FILEBASE\">$i</file>" >> $XMLOUTFILE
 done
 
 echo "</qresource>" >> $XMLOUTFILE
 echo "</RCC>" >> $XMLOUTFILE
 
+echo "Done creating outfile!"
+
 function ExecExists() {
-	(which $1 >/dev/null 2>&1 && exit 0) || exit 1
+	(which $1 >/dev/null 2>&1 && return 0) || return 1
 }
 
 if [ -e "$OE_QMAKE_RCC" ]; then
@@ -96,6 +105,12 @@ else
     exit 1
 fi
 
+echo "Building outfile: $OUTFILE.."
+
 $RCC -o "$OUTFILE" -binary "$XMLOUTFILE"
 
+echo "Cleaning up.."
+
 rm "$XMLOUTFILE"
+
+echo "All done!"
