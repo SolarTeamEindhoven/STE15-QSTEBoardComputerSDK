@@ -15,7 +15,7 @@ BCSettingsManager::~BCSettingsManager()
 }
 
 //-----------------------------------------------------------
-void BCSettingsManager::saveSettings(QString app_uid,
+void BCSettingsManager::saveSettings(const QString &app_uid,
                                      const QString& key,
                                      const QVariant& value)
 {
@@ -30,7 +30,7 @@ void BCSettingsManager::saveSettings(QString app_uid,
 }
 
 //-----------------------------------------------------------
-QVariant BCSettingsManager::loadSettings(QString app_uid,
+QVariant BCSettingsManager::loadSettings(const QString& app_uid,
                                          const QString& key,
                                          const QVariant& defaultValue)
 {
