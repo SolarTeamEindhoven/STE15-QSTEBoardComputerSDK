@@ -25,7 +25,7 @@ public:
      * @param key The key of the settings to save
      * @param value The value of the settings to save
      */
-    static void saveSettings(QString app_uid,
+    static void saveSettings(const QString& app_uid,
                       const QString& key,
                       const QVariant& value);
 
@@ -36,7 +36,7 @@ public:
      * @param defaultValue The default return value
      * @return
      */
-    static QVariant loadSettings(QString app_uid,
+    static QVariant loadSettings(const QString &app_uid,
                           const QString& key,
                           const QVariant& defaultValue = QVariant());
 private:

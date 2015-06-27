@@ -10,6 +10,7 @@
 
 // Qt includes
 #include <QQmlEngine>
+#include <QHash>
 
 // STE includes
 #include <BCAppDescriptor>
@@ -31,7 +32,7 @@ public:
     ~BCAppManager();
 
     QQmlListProperty<BCAppDescriptor> getAvailableApps();
-    Q_INVOKABLE BCVehicleApp* createApp(BCAppDescriptor *descriptor);
+    Q_INVOKABLE BCVehicleApp* getApp(BCAppDescriptor *descriptor);
 signals:
     void availableAppsChanged();
 
@@ -47,6 +48,7 @@ private:
     static int CountFunction(QQmlListProperty<BCAppDescriptor>* list);
     static BCAppDescriptor* AtFunction(QQmlListProperty<BCAppDescriptor>* list, int index);
 
+    static QHash<BCAppDescriptor*&, BCVehicleApp*> appInstances;
     friend class BCVAPParser;
 };
 

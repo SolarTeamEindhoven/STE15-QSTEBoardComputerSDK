@@ -34,12 +34,10 @@ QList<double> BCControlBarHardwareInterface::feedbackPositions;
 BCControlBarHardwareInterface::BCControlBarHardwareInterface(QQuickItem* parent)
     : QQuickItem(parent)
 {
-    /*
     connect(this, &BCControlBarHardwareInterface::positionChanged, this, &BCControlBarHardwareInterface::updateY);
     connect(this, &QQuickItem::windowChanged, this, &BCControlBarHardwareInterface::handleWindowChanged);
 
     bccontrolBarHardwareInterfaceList.append(this);
-    */
 }
 
 BCControlBarHardwareInterface::~BCControlBarHardwareInterface()
