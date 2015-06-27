@@ -4,6 +4,8 @@
 #include <QUrl>
 #include <BCQMLCreator>
 
+#include <QDebug>
+
 BCAppManager::BCAppManager(QObject* parent)
     : QObject(parent)
 {
@@ -20,9 +22,18 @@ QQmlListProperty<BCAppDescriptor> BCAppManager::getAvailableApps()
     return QQmlListProperty<BCAppDescriptor>(this, NULL, &BCAppManager::CountFunction, &BCAppManager::AtFunction);
 }
 
-BCVehicleApp* BCAppManager::createApp(BCAppDescriptor* descriptor)
+BCVehicleApp* BCAppManager::getApp(BCAppDescriptor* descriptor)
 {
-    return BCQMLCreator::constructQMLAppObject(*descriptor);
+    qDebug() << "Fetching new app..";
+    if (appInstances.contains(descriptor))
+    {
+        qDebug() << "App instance already existed!";
+        return appInstances.value(descriptor);
+    }
+    qDebug() << "App instance was newly created!";
+    BCVehicleApp* newApp = BCQMLCreator::constructQMLAppObject(*descriptor);
+    appInstances.insert(descriptor, newApp);
+    return newApp;
 }
 
 QString BCAppManager::uniqueIdentifier(const QString& name)
@@ -70,6 +81,6 @@ BCAppDescriptor* BCAppManager::appendApp(const BCAppDescriptor& newApp)
 
     return result;
 }
-
+QHash<BCAppDescriptor*&, BCVehicleApp*> BCAppManager::appInstances;
 QVector<BCAppManager*> BCAppManager::instances;
 std::vector<BCAppDescriptor> BCAppManager::descriptors;

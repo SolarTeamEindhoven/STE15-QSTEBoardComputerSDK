@@ -22,7 +22,6 @@ class BCLauncherManager : public QObject
     Q_DISABLE_COPY(BCLauncherManager)
 
     Q_PROPERTY(QQmlListProperty<BCLauncherDescriptor> availableLaunchers READ getAvailableLaunchers NOTIFY availableLaunchersChanged)
-
 public:
     explicit BCLauncherManager(QObject* parent = 0);
     ~BCLauncherManager();
@@ -34,6 +33,7 @@ public:
      * @return The launcher
      */
     Q_INVOKABLE BCVehicleLauncher* createLauncher(BCLauncherDescriptor*);
+
 signals:
     void availableLaunchersChanged();
 

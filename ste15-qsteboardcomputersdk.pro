@@ -42,7 +42,8 @@ SOURCES += \
     bcappmanager.cpp \
     bclauncherdescriptor.cpp \
     bcappdescriptor.cpp \
-    bcqmlcreator.cpp
+    bcqmlcreator.cpp \
+    bcsettingsmanager.cpp
 
 HEADERS += \
     include/bccontrolbar.h \
@@ -76,7 +77,9 @@ HEADERS += \
     include/bcappdescriptor.h \
     include/BCAppDescriptor \
     include/bcqmlcreator.h \
-    include/BCQMLCreator
+    include/BCQMLCreator \
+    include/bcsettingsmanager.h \
+    include/BCSettingsManager \
 
 DISTFILES = qmldir
 

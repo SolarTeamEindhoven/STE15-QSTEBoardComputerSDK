@@ -1,9 +1,12 @@
 #include "bclaunchermanager.h"
 
+// Qt includes
 #include <QVector>
 #include <QUrl>
 
+// STE Includes
 #include <BCQMLCreator>
+#include <BCSettingsManager>
 
 BCLauncherManager::BCLauncherManager(QObject* parent)
     : QObject(parent)
