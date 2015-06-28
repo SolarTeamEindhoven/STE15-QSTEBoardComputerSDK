@@ -1,7 +1,13 @@
-build/
+# Build fodler
+/build/
+
+# Qt files
 *.pro.user
 *.config
 *.creator
 *.files
 *.includes
-*.DS_Store
+*.pro.user.*
+
+# OSx files
+**/.DS_Store
