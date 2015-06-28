@@ -70,9 +70,9 @@ echo "$REQUIRED_DL" | while read line ; do
 done
 fi
 
-echo "Creating XML outfile.."
-
-XMLOUTFILE="$OUTFILE.xml"
+XMLOUTFILE="temp.xml"
+install -D /dev/null "$OUTFILE"
+echo "Creating XMLOutfile: $XMLOUTFILE"
 echo "<!DOCTYPE RCC>" > $XMLOUTFILE
 echo "<RCC version=\"1.0\">" >> $XMLOUTFILE
 echo "<qresource>" >> $XMLOUTFILE
@@ -106,11 +106,10 @@ else
 fi
 
 echo "Building outfile: $OUTFILE.."
-
 $RCC -o "$OUTFILE" -binary "$XMLOUTFILE"
 
 echo "Cleaning up.."
 
-rm "$XMLOUTFILE"
+rm "temp.xml"
 
 echo "All done!"
