@@ -24,13 +24,10 @@ QQmlListProperty<BCAppDescriptor> BCAppManager::getAvailableApps()
 
 BCVehicleApp* BCAppManager::getApp(BCAppDescriptor* descriptor)
 {
-    qDebug() << "Fetching new app..";
     if (appInstances.contains(descriptor))
     {
-        qDebug() << "App instance already existed!";
         return appInstances.value(descriptor);
     }
-    qDebug() << "App instance was newly created!";
     BCVehicleApp* newApp = BCQMLCreator::constructQMLAppObject(*descriptor);
     appInstances.insert(descriptor, newApp);
     return newApp;
