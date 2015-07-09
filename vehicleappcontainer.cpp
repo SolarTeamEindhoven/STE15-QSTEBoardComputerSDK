@@ -27,7 +27,7 @@ BCVehicleAppContainer::BCVehicleAppContainer(QQuickItem *parent)
     , bccontrolBarHardwareInterface(NULL)
     , bccontrolBarOpacity(0)
 {
-    ;
+    this->setFlags(ItemClipsChildrenToShape);
 }
 
 BCVehicleAppContainer::~BCVehicleAppContainer()
