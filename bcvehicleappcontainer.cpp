@@ -27,7 +27,8 @@ BCVehicleAppContainer::BCVehicleAppContainer(QQuickItem *parent)
     , bccontrolBarHardwareInterface(NULL)
     , bccontrolBarOpacity(0)
 {
-    this->setFlags(ItemClipsChildrenToShape);
+    setFlags(ItemClipsChildrenToShape);
+    setClip(true);
 }
 
 BCVehicleAppContainer::~BCVehicleAppContainer()
@@ -60,9 +61,9 @@ void BCVehicleAppContainer::setApp(BCVehicleApp* newApp)
     newApp->setParentItem(this);
     app = newApp;
 
-    //QVariant linkToThis = QVariant::fromValue<BCVehicleAppContainer*>(this);
-    //app->setProperty("parent", linkToThis);
-    //app->property("anchors").value<QObject*>()->setProperty("fill", linkToThis);
+//    QVariant linkToThis = QVariant::fromValue<BCVehicleAppContainer*>(this);
+//    app->setProperty("parent", linkToThis);
+//    app->property("anchors").value<QObject*>()->setProperty("fill", linkToThis);
 
     connectAppToBCControlBar(newApp);
 
@@ -139,9 +140,11 @@ void BCVehicleAppContainer::connectAppToBCControlBar(BCVehicleApp* app)
     connect(this, &QQuickItem::widthChanged, this, &BCVehicleAppContainer::updateControlBarWidth);
     bccontrolBarHardwareInterface->setWidth(width());
 
-    app->getBCControlBar()->setParent(this);
-    //QVariant link = QVariant::fromValue<BCControlBarHardwareInterface*>(bccontrolBarHardwareInterface);
-    //app->getBCControlBar()->setProperty("parent", link);
+    app->getBCControlBar()->setParentItem(bccontrolBarHardwareInterface);
+
+//    QVariant link = QVariant::fromValue<BCVehicleAppContainer*>(this);
+    QVariant link = QVariant::fromValue<BCControlBarHardwareInterface*>(bccontrolBarHardwareInterface);
+//    app->getBCControlBar()->setProperty("parent", link);
     app->getBCControlBar()->property("anchors").value<QObject*>()->setProperty("fill", link);
 }
 

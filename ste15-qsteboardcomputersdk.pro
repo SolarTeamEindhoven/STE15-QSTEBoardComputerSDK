@@ -28,14 +28,8 @@ uri = nl.solarteameindhoven.sdk
 # Input
 SOURCES += \
     ste15-qsteboardcomputersdk_plugin.cpp \
-    vehicleapp.cpp \
     bccontrolbar.cpp \
-    controlbarbutton.cpp \
-    controlbarscrollwheel.cpp \
-    vehiclelauncher.cpp \
-    vehicleappcontainer.cpp \
     bccontrolbarhardwareinterface.cpp \
-    carsensor.cpp \
     bcvapmanager.cpp \
     bcvapdescriptor.cpp \
     bclaunchermanager.cpp \
@@ -43,7 +37,13 @@ SOURCES += \
     bclauncherdescriptor.cpp \
     bcappdescriptor.cpp \
     bcqmlcreator.cpp \
-    bcsettingsmanager.cpp
+    bcsettingsmanager.cpp \
+    bcvehicleappcontainer.cpp \
+    bcvehicleapp.cpp \
+    bcvehiclelauncher.cpp \
+    bccarsensor.cpp \
+    bccontrolbarbutton.cpp \
+    bccontrolbarscrollwheel.cpp
 
 HEADERS += \
     include/bccontrolbar.h \
