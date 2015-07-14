@@ -212,8 +212,9 @@ void BCControlBar::updateDpiProperties()
 
 void BCControlBar::setParentToThis(QQuickItem* item)
 {
-    QVariant link = QVariant::fromValue<BCControlBar*>(this);
-    item->setProperty("parent", link);
+    item->setParentItem(this);
+//    QVariant link = QVariant::fromValue<BCControlBar*>(this);
+//    item->setProperty("parent", link);
 }
 
 void BCControlBar::updateButtonDpiProperties(BCControlBarButton* button, double location, double dpmm)

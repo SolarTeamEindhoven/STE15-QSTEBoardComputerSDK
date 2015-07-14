@@ -55,6 +55,7 @@ BCControlBar* BCVehicleApp::getBCControlBar()
 void BCVehicleApp::setBCControlBar(BCControlBar* newBCControlbar)
 {
     bccontrolbar = newBCControlbar;
+    bccontrolbar->setParentItem(this);
     emit bccontrolbarChanged(newBCControlbar);
 }
 
